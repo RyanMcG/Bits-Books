@@ -1,0 +1,19 @@
+-- Authors: 	Ryan McGowan
+--		Alex Notwell
+
+-- Step 2: Loading Data
+-- Book
+-- Publisher
+-- Book_Author
+-- Author
+-- Book_Category
+-- Category
+-- Inventory
+-- InventoryOrder
+-- Cart
+-- CartItem
+-- Order
+-- OrderItem
+-- User
+-- UserAddress
+-- Billing
