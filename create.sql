@@ -171,7 +171,7 @@ CREATE TABLE `User` (
 -- Admin
 CREATE TABLE `Admin` (
   id INT(13) NOT NULL AUTO_INCREMENT,
-  user_id INT(13) NOT NULL,
+  user_id INT(13),
   `level` VARCHAR(8) NOT NULL,
   date_created DATETIME NOT NULL,
   date_modified DATETIME NOT NULL,

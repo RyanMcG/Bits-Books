@@ -34,7 +34,7 @@ ALTER TABLE CartItem ADD FOREIGN KEY(book_id) REFERENCES Book(id);
 ALTER TABLE Inventory ADD FOREIGN KEY(book_id) REFERENCES Book(id);
 
 -- InventoryOrder
-ALTER TABLE InventoryOrder ADD FOREIGN KEY(invetory_id) REFERENCES Inventory(id);
+ALTER TABLE InventoryOrder ADD FOREIGN KEY(inventory_id) REFERENCES Inventory(id);
 
 -- Order
 ALTER TABLE `Order` ADD FOREIGN KEY(cart_id) REFERENCES Cart(id);
