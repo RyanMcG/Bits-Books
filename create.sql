@@ -56,7 +56,7 @@ CREATE TABLE Author (
 CREATE TABLE Book_Category (
   id INT(13) NOT NULL AUTO_INCREMENT,
   book_id INT(13),
-  cateogry_id INT(13),
+  category_id INT(13),
   date_created DATETIME NOT NULL,
   date_modified DATETIME NOT NULL,
   PRIMARY KEY(id)
@@ -134,6 +134,7 @@ CREATE TABLE `Order` (
 CREATE TABLE OrderItem (
   id INT(13) NOT NULL AUTO_INCREMENT,
   order_id INT(13),
+  book_id INT(13),
   quantity INT(10),
   cost DECIMAL(7,2) NOT NULL,
   price DECIMAL(7,2) NOT NULL,
@@ -198,11 +199,31 @@ CREATE TABLE UserAddress (
 CREATE TABLE Billing (
   id INT(13) NOT NULL AUTO_INCREMENT,
   user_id INT(13),
+  `type` VARCHAR(12),
+  subclass_id INT(13),
+  date_created DATETIME NOT NULL,
+  date_modified DATETIME NOT NULL,
+  PRIMARY KEY(id)
+);
+
+-- Creditcard
+CREATE TABLE Creditcard (
+  id INT(13) NOT NULL AUTO_INCREMENT,
   address_id INT(13),
   name VARCHAR(64) NOT NULL,
   cc_number INT(16) NOT NULL,
   sec_number INT(4) NOT NULL,
   exp_date DATE NOT NULL,
+  date_created DATETIME NOT NULL,
+  date_modified DATETIME NOT NULL,
+  PRIMARY KEY(id)
+);
+
+-- Giftcard
+CREATE TABLE Giftcard (
+  id INT(13) NOT NULL AUTO_INCREMENT,
+  `number` VARCHAR(24) NOT NULL,
+  pin INT(4) NOT NULL,
   date_created DATETIME NOT NULL,
   date_modified DATETIME NOT NULL,
   PRIMARY KEY(id)
