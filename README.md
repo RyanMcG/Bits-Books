@@ -78,20 +78,24 @@ these are covered in the Heroku instructions rerferenced above).
 
 2. Install *virtualenv*
 
-      pip install virtualenv
+        pip install virtualenv
 
    You might need to run the above command as sudo depending on your setup.
 
 3. Setup and initlize *virtualenv*.
 
-      cd /path/to/this/project/
-      virtualenv env
-      source env/bin/active
+        cd /path/to/this/project/
+        virtualenv env
+        source env/bin/active
+
+   If you are using bash you can replace the last command with: 
+
+        . env/bin/active
 
 4. Install Flask and other dependencies.
 
-      pip install -r requirements.txt
+        pip install -r requirements.txt
 
 5. (Optional) Install some development dependencies.
 
-      pip install -r development-deps.txt
+        pip install -r development-deps.txt
