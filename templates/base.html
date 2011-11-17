@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {%- block head %}
+    <title>{% block title %}Bits & Books{% endblock %}</title>
+    <link href='/static/favicon.ico' rel='icon' type='image/x-icon'>
+    <link href='/static/css/screen.css' media='screen, projection' rel='stylesheet' type='text/css'>
+    <link href='/static/css/screen.css' media='screen, projection' rel='stylesheet' type='text/css'>
+    <link href='/static/css/print.css' media='print' rel='stylesheet' type='text/css'>
+    <!--[if lt IE 8]>
+      <link href="/css/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
+    <![endif]-->
+    {% endblock -%}
+  </head>
+  <body class='bp'>
+    <div id='header'>
+      {% block header %}
+    </div>
+    <div id='container'>
+      {%- block container %}
+      <div id='content'>
+        {%- block content %}{% endblock -%}
+      </div>
+      <div id='sidebar'>
+        {%- block sidebar %}{% endblock -%}
+      </div>
+      {% endblock -%}
+    </div>
+    <div id='footer'>
+        {%- block footer %}{% endblock -%}
+    </div>
+  </body>
+</html>
