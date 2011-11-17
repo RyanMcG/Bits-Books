@@ -42,6 +42,7 @@ ALTER TABLE `Order` ADD FOREIGN KEY(user_id) REFERENCES User(id);
 
 -- OrderItem
 ALTER TABLE OrderItem ADD FOREIGN KEY(book_id) REFERENCES Book(id);
+ALTER TABLE OrderItem ADD FOREIGN KEY(order_id) REFERENCES `Order`(id);
 
 -- OrderPayment
 ALTER TABLE OrderPayment ADD FOREIGN KEY(order_id) REFERENCES `Order`(id);
@@ -56,6 +57,8 @@ ALTER TABLE UserAddress ADD FOREIGN KEY(user_id) REFERENCES `User`(id);
 
 -- Creditcard
 ALTER TABLE Creditcard ADD FOREIGN KEY(address_id) REFERENCES `UserAddress`(id);
+ALTER TABLE Creditcard ADD FOREIGN KEY(billing_id) REFERENCES Billing(id);
 
 -- Giftcard
+ALTER TABLE GirftCard ADD FOREIGN KEY(billing_id) REFERENCES Billing(id);
 

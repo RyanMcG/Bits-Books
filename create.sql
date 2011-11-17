@@ -200,7 +200,6 @@ CREATE TABLE Billing (
   id INT(13) NOT NULL AUTO_INCREMENT,
   user_id INT(13),
   `type` VARCHAR(12),
-  subclass_id INT(13),
   date_created DATETIME NOT NULL,
   date_modified DATETIME NOT NULL,
   PRIMARY KEY(id)
@@ -210,6 +209,7 @@ CREATE TABLE Billing (
 CREATE TABLE Creditcard (
   id INT(13) NOT NULL AUTO_INCREMENT,
   address_id INT(13),
+  billing_id INT(13),
   name VARCHAR(64) NOT NULL,
   cc_number INT(16) NOT NULL,
   sec_number INT(4) NOT NULL,
@@ -222,6 +222,7 @@ CREATE TABLE Creditcard (
 -- Giftcard
 CREATE TABLE Giftcard (
   id INT(13) NOT NULL AUTO_INCREMENT,
+  billing_id INT(13),
   `number` VARCHAR(24) NOT NULL,
   pin INT(4) NOT NULL,
   date_created DATETIME NOT NULL,
