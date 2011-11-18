@@ -1,0 +1,3 @@
+Flask-Admin==0.2.2
+Flask-Coffee==0.2
+Flask-Compass==0.2
