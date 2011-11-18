@@ -96,6 +96,10 @@ these are covered in the Heroku instructions rerferenced above).
 
         pip install -r requirements.txt
 
-5. (Optional) Install some development dependencies.
+5. That's it! To start the app just run:
 
-        pip install -r development-deps.txt
+        python web.py
+ 
+   Or if you have foreman installed (`gem install foreman`):
+
+        foreman start
