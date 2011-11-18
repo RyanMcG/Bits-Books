@@ -85,7 +85,7 @@ these are covered in the Heroku instructions rerferenced above).
 3. Setup and initlize *virtualenv*.
 
         cd /path/to/this/project/
-        virtualenv env
+        virtualenv --no-site-packages env
         source env/bin/active
 
    If you are using bash you can replace the last command with: 
