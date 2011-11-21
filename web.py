@@ -1,6 +1,7 @@
 import os
-from flask import Flask, send_from_directory
-app = Flask(__name__)
+
+from bitslib.app import *
+from flask import send_from_directory
 
 @app.route('/favicon.ico')
 def favicon():
@@ -61,7 +62,12 @@ def create_book():
     pass
 
 if __name__ == '__main__':
-    #Change this to false when on production
-    port = int(os.environ.get("PORT", 5000))
-    app.debug = True
-    app.run("0.0.0.0", port)
+    if app.is_production:
+        address = "0.0.0.0"
+        port = int(os.environ.get("PORT", 5000))
+    else:
+        app.debug = True
+        address = "127.0.0.1"
+        port = int(os.environ.get("PORT", 5000))
+
+    app.run(address, port)
