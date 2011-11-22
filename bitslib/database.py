@@ -8,15 +8,19 @@ from yaml import load
 #"production"
 app.is_production = len(argv) > 1 and argv[1].lower() == "production"
 
+
 def _init_db(app):
     """Initialize a SQLALchemy instance for the given app."""
     dbshortname = 'production' if app.is_production else 'development'
     config_file = open(path.join(app.root_path, 'database.yml'))
     config = load(config_file)
-    app.config['SQLALCHEMY_DATABASE_URI'] = config['databases'][dbshortname]['hostspec'];
+    app.config['SQLALCHEMY_DATABASE_URI'] = config['databases'][\
+            dbshortname]['hostspec']
     return SQLAlchemy(app)
 
+
 db = _init_db(app)
+
 
 class User(db.Model):
     pass
