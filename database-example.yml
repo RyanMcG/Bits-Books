@@ -1,0 +1,6 @@
+# Configuration File
+databases:
+  production:
+    hostspec: postgres://vpzrkagrpv:mQreIuBHckM-zldZ2gqk@ec2-107-22-181-228.compute-1.amazonaws.com/vpzrkagrpv
+  development:
+    hostspec: mysql://bitbook:amazon@localhost/bitbook
