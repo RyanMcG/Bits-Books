@@ -1,10 +1,23 @@
 import os
-
 from flask import Flask, send_from_directory
+from bitslib.database import init_db
+from sys import argv
 
 #Create the app and then import the database (must be done in this order)
 app = Flask(__name__)
-from bitslib.database import db
+
+if __name__ == '__main__':
+    if app.is_production:
+        address = "0.0.0.0"
+        port = int(os.environ.get("PORT", 5000))
+    else:
+        app.debug = True
+        address = "127.0.0.1"
+        port = int(os.environ.get("PORT", 5000))
+
+    app.run(address, port)
+
+db = init_db(app, argv)
 
 
 @app.route('/favicon.ico')
@@ -73,15 +86,3 @@ def view_inventory_order():
 @app.route('/create/inventory_order')
 def create_inventory_order():
     pass
-
-
-if __name__ == '__main__':
-    if app.is_production:
-        address = "0.0.0.0"
-        port = int(os.environ.get("PORT", 5000))
-    else:
-        app.debug = True
-        address = "127.0.0.1"
-        port = int(os.environ.get("PORT", 5000))
-
-    app.run(address, port)
