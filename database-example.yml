@@ -1,6 +1,9 @@
-# Configuration File
+# Database Configuration File
+# To change the default database you must copy this file to database.yml and
+# change the hostspec to connect to your database.
+#   hostspec: <protocol>://<user>:<password>@<host>/<database name>
 databases:
   production:
-    hostspec: postgres://vpzrkagrpv:mQreIuBHckM-zldZ2gqk@ec2-107-22-181-228.compute-1.amazonaws.com/vpzrkagrpv
+    hostspec: postgres://exuser:expass@example.exampleaws.com/somedbname
   development:
     hostspec: mysql://bitbook:amazon@localhost/bitbook

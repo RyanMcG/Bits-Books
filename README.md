@@ -11,7 +11,7 @@ Flask front-end for CSE 670 Database project.
 
 * Python
   * Flask
-    * Flask-Gravatar
+    * Gravatar
 * Compass and SASS
   * blueprint/semantic
 * HAML
@@ -24,10 +24,10 @@ Flask front-end for CSE 670 Database project.
 
 Setting up the database is a 4 step process. To start off you need to have
 the necessary permissions to create a database. Any value enclosed by angle
-brackets (e.g. <variable>) is a variable and should bre replaced by the
+brackets (e.g. <variable>) is a variable and should be replaced by the
 appropriate value.
 
-If you are installing this on your own system and your mysql super user is root
+If you are installing this on your own system and your MySQL super user is root
 then you can use the following values:
 
     <super user> = root
@@ -66,7 +66,7 @@ This package is compatible with Heroku/cedar. See the Heroku website for
 Heroku](http://devcenter.heroku.com/articles/python).
 
 To get the app running locally you just need to run a few commands. (Most of
-these are covered in the Heroku instructions rerferenced above).
+these are covered in the Heroku instructions referenced above).
 
 1.  Install *pip* on your computer (if it isn't already installed). This may change
     depending on your distribution, so you might want to look this up on your
@@ -83,7 +83,7 @@ these are covered in the Heroku instructions rerferenced above).
 
     You might need to run the above command as sudo depending on your setup.
 
-3.  Setup and initlize *virtualenv*.
+3.  Setup and initialize *virtualenv*.
 
         cd /path/to/this/project/
         virtualenv --no-site-packages env
@@ -97,7 +97,14 @@ these are covered in the Heroku instructions rerferenced above).
 
         pip install -r requirements.txt
 
-5.  That's it! To start the app just run:
+5.  Before we can run the application we must make it aware of the database.
+    Copy the `database-example.yml` file to `database.yml` with the following
+    commands and edit it accordingly.
+
+        cp database-example.yml database.yml
+        $EDITOR database.yml
+
+6.  That's it! To start the app just run:
 
         python web.py
  
