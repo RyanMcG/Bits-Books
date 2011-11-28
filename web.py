@@ -1,22 +1,11 @@
 import os
 from flask import Flask, send_from_directory
 from bitslib.database import init_db
+from bitslib.models import User
 from sys import argv
 
 #Create the app and then import the database (must be done in this order)
 app = Flask(__name__)
-
-if __name__ == '__main__':
-    if app.is_production:
-        address = "0.0.0.0"
-        port = int(os.environ.get("PORT", 5000))
-    else:
-        app.debug = True
-        address = "127.0.0.1"
-        port = int(os.environ.get("PORT", 5000))
-
-    app.run(address, port)
-
 db = init_db(app, argv)
 
 
@@ -55,12 +44,16 @@ def view_cart():
 
 @app.route('/view/profile')
 def view_profile():
-    pass
+    users = User.query.all()
+    return "<pre>" + users + "</pre>"
 
 
 @app.route('/edit/profile')
 def edit_profile():
-    pass
+    some_user = User("roinsmith@gmail.com", "Ryan", "derpderp", "Ryan McGowan")
+    db.session.add(some_user)
+    db.session.commit()
+    return "Mk...ran that code yo."
 
 
 @app.route('/add/book/skjdnaskdsak')
@@ -86,3 +79,14 @@ def view_inventory_order():
 @app.route('/create/inventory_order')
 def create_inventory_order():
     pass
+
+if __name__ == '__main__':
+    if app.is_production:
+        address = "0.0.0.0"
+        port = int(os.environ.get("PORT", 5000))
+    else:
+        app.debug = True
+        address = "127.0.0.1"
+        port = int(os.environ.get("PORT", 5000))
+
+    app.run(address, port)

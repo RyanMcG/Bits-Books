@@ -1,9 +1,12 @@
 from flaskext.sqlalchemy import SQLAlchemy
+
 from os import path
 from yaml import load
 
 #This application should be run in production mode if the first argument is
 #"production"
+
+db = SQLAlchemy()
 
 
 def init_db(app, cliargs):
@@ -14,4 +17,6 @@ def init_db(app, cliargs):
     config = load(config_file)
     app.config['SQLALCHEMY_DATABASE_URI'] = config['databases'][\
             dbshortname]['hostspec']
-    return SQLAlchemy(app)
+    db.app = app
+    db.init_app(app)
+    return db
