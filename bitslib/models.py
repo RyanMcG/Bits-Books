@@ -84,7 +84,7 @@ class Book(db.Model):
     date_created = db.Column(u'date_created', db.DateTime(), nullable=False)
     date_modified = db.Column(u'date_modified', db.DateTime(), nullable=False)
     id = db.Column(u'id', db.Integer(), primary_key=True, nullable=False)
-    isbn = db.Column(u'isbn', db.Integer(), nullable=False)
+    isbn = db.Column(u'isbn', db.Integer(), nullable=False, unique=True)
     price = db.Column(u'price', db.Float(precision=7, scale=2), nullable=False)
     publisher_id = db.Column(u'publisher_id', db.Integer(),
             db.ForeignKey('Publisher.id'))
@@ -143,7 +143,8 @@ class Category(db.Model):
     date_created = db.Column(u'date_created', db.DateTime(), nullable=False)
     date_modified = db.Column(u'date_modified', db.DateTime(), nullable=False)
     id = db.Column(u'id', db.Integer(), primary_key=True, nullable=False)
-    name = db.Column(u'name', db.String(length=32), nullable=False)
+    name = db.Column(u'name', db.String(length=32), nullable=False,
+            unique=True)
 
     #db.relationship definitions
     Books = db.relationship('Book', secondary=Book_Category)
@@ -182,7 +183,8 @@ class Giftcard(db.Model):
     date_created = db.Column(u'date_created', db.DateTime(), nullable=False)
     date_modified = db.Column(u'date_modified', db.DateTime(), nullable=False)
     id = db.Column(u'id', db.Integer(), primary_key=True, nullable=False)
-    number = db.Column(u'number', db.String(length=24), nullable=False)
+    number = db.Column(u'number', db.String(length=24), nullable=False,
+            unique=True)
     pin = db.Column(u'pin', db.Integer(), nullable=False)
 
     #db.relationship definitions
@@ -308,12 +310,14 @@ class User(db.Model):
     #column definitions
     date_created = db.Column(u'date_created', db.DateTime(), nullable=False)
     date_modified = db.Column(u'date_modified', db.DateTime(), nullable=False)
-    email = db.Column(u'email', db.String(length=64), nullable=False)
+    email = db.Column(u'email', db.String(length=64), nullable=False,
+            unique=True)
     id = db.Column(u'id', db.Integer(), primary_key=True, nullable=False)
     name = db.Column(u'name', db.String(length=64))
     password = db.Column(u'password', db.String(length=64), nullable=False)
     phone = db.Column(u'phone', db.Integer())
-    username = db.Column(u'username', db.String(length=32), nullable=False)
+    username = db.Column(u'username', db.String(length=32), nullable=False,
+            unique=True)
 
     def __init__(self, email, username, password, name=None, phone=None):
         self.name = name
