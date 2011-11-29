@@ -66,7 +66,7 @@ This package is compatible with Heroku/cedar. See the Heroku website for
 Heroku](http://devcenter.heroku.com/articles/python).
 
 To get the app running locally you just need to run a few commands. (Most of
-these are covered in the Heroku instructions rerferenced above).
+these are covered in the Heroku instructions referenced above).
 
 1.  Install *pip* on your computer (if it isn't already installed). This may change
     depending on your distribution, so you might want to look this up on your
