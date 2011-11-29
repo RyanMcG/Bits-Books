@@ -13,10 +13,11 @@ def init_db(app, cliargs):
     """Initialize a SQLALchemy instance for the given app."""
     app.is_production = len(cliargs) > 1 and cliargs[1].lower() == "production"
     dbshortname = 'production' if app.is_production else 'development'
-    config_file = open(path.join(app.root_path, 'database.yml'))
+    config_file = open(path.join(app.root_path, 'config.yml'))
     config = load(config_file)
     app.config['SQLALCHEMY_DATABASE_URI'] = config['databases'][\
             dbshortname]['hostspec']
+    app.secret_key = config['application']['secret_key']
     db.app = app
     db.init_app(app)
     return db
