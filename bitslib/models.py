@@ -3,6 +3,7 @@
 
 from datetime import datetime
 from bitslib.database import db
+from bitslib.utils import generate_encrypted_password
 
 #Alias a function
 now = datetime.now
@@ -166,8 +167,8 @@ class Creditcard(db.Model):
     date_modified = db.Column(u'date_modified', db.DateTime(), nullable=False)
 
     #db.relationship definitions
-    UserAddress = db.relationship('UserAddres',
-            primaryjoin='Creditcard.address_id==UserAddres.id')
+    UserAddress = db.relationship('UserAddress',
+            primaryjoin='Creditcard.address_id==UserAddress.id')
     Billing = db.relationship('Billing',
             primaryjoin='Creditcard.billing_id==Billing.id')
 
@@ -318,27 +319,43 @@ class User(db.Model):
     phone = db.Column(u'phone', db.Integer())
     username = db.Column(u'username', db.String(length=32), nullable=False,
             unique=True)
+    authenticated = False
 
     def __init__(self, email, username, password, name=None, phone=None):
         self.name = name
         self.username = username
         self.email = email
-        self.password = password
+        self.password = generate_encrypted_password(password)
         self.phone = phone
         current_time = now().strftime("%Y-%m-%d %H:%M")
         self.date_created = current_time
         self.date_modified = current_time
+        self.authenticated = False
 
     def __repr__(self):
-        return "<User id: {id}, name: {name}>".format(id=self.id,
-                name=self.name)
+        return "<User id: {id}, username: {usn}, name: {name}>".format(
+                id=self.id, name=self.name, usn=self.username)
+
+    #Methods for Flask-Login
+
+    def get_id(self):
+        return unicode(self.id)
+
+    def is_anonymous(self):
+        return not isinstance(self.id, long)
+
+    def is_authenticated(self):
+        return self.authenticated
+
+    def is_active(self):
+        return self.is_authenticated()
 
     #db.relationship definitions
     Carts = db.relationship('Cart', primaryjoin='User.id==Cart.user_id',
             backref=db.backref('User'))
 
 
-class UserAddres(db.Model):
+class UserAddress(db.Model):
     __tablename__ = 'UserAddress'
 
     __table_args__ = {}
@@ -371,5 +388,5 @@ class UserAddres(db.Model):
         self.date_modified = current_time
 
     #db.relationship definitions
-    User = db.relationship('User', primaryjoin='UserAddres.user_id==User.id',
+    User = db.relationship('User', primaryjoin='UserAddress.user_id==User.id',
             backref=db.backref('UserAddress'))

@@ -1,4 +1,9 @@
-# Database Configuration File
+# Configuration File
+
+# You must set a secretkey
+application:
+  secret_key: putrandomgookhere
+
 # To change the default database you must copy this file to database.yml and
 # change the hostspec to connect to your database.
 #   hostspec: <protocol>://<user>:<password>@<host>/<database name>

@@ -5,4 +5,4 @@ lib
 .Python
 *.pyc
 README.html
-database.yml
+config.yml
