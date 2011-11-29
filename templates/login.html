@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form method="POST" action="">
+    {{ form.csrf }}
+    {{ form.username.label }} {{ form.username(size=32) }}
+    {{ form.password.label }} {{ form.password(size=32) }}
+    {{ form.remember_me.label }} {{ form.remember_me }}
+    <input type="submit" value="Login">
+</form>
+{% endblock %}
