@@ -10,7 +10,7 @@ SET storage_engine=INNODB;
 -- Book
 CREATE TABLE Book (
   id INT(13) NOT NULL AUTO_INCREMENT,
-  isbn INT(13) NOT NULL,
+  isbn INT(13) UNIQUE NOT NULL,
   title VARCHAR(64) NOT NULL,
   publisher_id INT(13),
   price DECIMAL(7,2) NOT NULL,
@@ -65,7 +65,7 @@ CREATE TABLE Book_Category (
 -- Category
 CREATE TABLE Category (
   id INT(13) NOT NULL AUTO_INCREMENT,
-  name VARCHAR(32) NOT NULL,
+  name VARCHAR(32) UNIQUE NOT NULL,
   date_created DATETIME NOT NULL,
   date_modified DATETIME NOT NULL,
   PRIMARY KEY(id)
@@ -97,6 +97,7 @@ CREATE TABLE InventoryOrder (
 -- Cart
 CREATE TABLE Cart (
   id INT(13) NOT NULL AUTO_INCREMENT,
+  user_id INT(13),
   order_id INT(13),
   status VARCHAR(10) NOT NULL,
   date_created DATETIME NOT NULL,
@@ -120,7 +121,6 @@ CREATE TABLE CartItem (
 CREATE TABLE `Order` (
   id INT(13) NOT NULL AUTO_INCREMENT,
   user_id INT(13),
-  cart_id INT(13),
   subtotal DECIMAL(7,2) NOT NULL,
   shipping DECIMAL(7,2) NOT NULL,
   tax DECIMAL(7,2) NOT NULL,
@@ -158,9 +158,9 @@ CREATE TABLE OrderPayment (
 -- User
 CREATE TABLE `User` (
   id INT(13) NOT NULL AUTO_INCREMENT,
-  username VARCHAR(32) NOT NULL,
+  username VARCHAR(32) UNIQUE NOT NULL,
   name VARCHAR(64),
-  email VARCHAR(64) NOT NULL,
+  email VARCHAR(64) UNIQUE NOT NULL,
   password VARCHAR(64) NOT NULL,
   phone INT(15),
   date_created DATETIME NOT NULL,
@@ -223,7 +223,7 @@ CREATE TABLE Creditcard (
 CREATE TABLE Giftcard (
   id INT(13) NOT NULL AUTO_INCREMENT,
   billing_id INT(13),
-  `number` VARCHAR(24) NOT NULL,
+  `number` VARCHAR(24) UNIQUE NOT NULL,
   pin INT(4) NOT NULL,
   date_created DATETIME NOT NULL,
   date_modified DATETIME NOT NULL,

@@ -1,2 +1,2 @@
 webdev: python web.py
-webproduction: python web.py production
+web: python web.py production
