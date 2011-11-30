@@ -3,9 +3,9 @@ Flask-Login==0.1
 Flask-SQLAlchemy==0.15
 Flask-WTF==0.5.2
 Jinja2==2.6
-PyMySQL==0.5
 PyYAML==3.10
 SQLAlchemy==0.7.3
 WTForms==0.6.3
 Werkzeug==0.8.1
+psycopg2==2.4.2
 wsgiref==0.1.2
