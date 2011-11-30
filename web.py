@@ -1,6 +1,6 @@
 import os
 
-from bitslib.database import init_db
+from bitslib.database import init_app
 from bitslib.forms import LoginForm, RegistrationForm
 from bitslib.models import User
 from bitslib.user_manager import login_manager
@@ -14,7 +14,7 @@ from sys import argv
 
 #Create the app and then import the database (must be done in this order)
 app = Flask(__name__)
-db = init_db(app, argv)
+db = init_app(app, argv)
 login_manager.setup_app(app)
 
 
@@ -149,13 +149,17 @@ def view_inventory_order():
 def create_inventory_order():
     pass
 
-if __name__ == '__main__':
+
+def run_application():
     if app.is_production:
         address = "0.0.0.0"
         port = int(os.environ.get("PORT", 5000))
     else:
-        app.debug = True
         address = "127.0.0.1"
         port = int(os.environ.get("PORT", 5000))
 
     app.run(address, port)
+
+
+if __name__ == '__main__':
+    run_application()
