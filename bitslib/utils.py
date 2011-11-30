@@ -6,10 +6,15 @@ def debug_str(print_me):
     if isinstance(print_me, (list, tuple)):
         print_me = "\n".join([str(x) for x in print_me])
     if isinstance(print_me, dict):
-        print_me = "{\n\t" + "\n\t".join([str(x) + ": " + str(y) for x, y in
-            print_me.items()]) + "\n}"
-    return """<code class="debug-str"><pre>{0}</pre></code>""".format(
-            Markup.escape(str(print_me)))
+        print_me = "{\n\t"
+        + "\n\t".join([str(x) + ": " + str(y) for x, y in print_me.items()])
+        + "\n}"
+    escaped = Markup.escape(str(print_me))
+    return """<code class="debug-str"><pre>{0}</pre></code>""".format(escaped)
+
+
+def str_to_digits(wannabe_number):
+    return ''.join(filter(lambda x: x.isdigit(), str(wannabe_number)))
 
 
 def generate_encrypted_password(password, user=None):

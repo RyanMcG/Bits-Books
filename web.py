@@ -4,7 +4,7 @@ from bitslib.database import init_db
 from bitslib.forms import LoginForm, RegistrationForm
 from bitslib.models import User
 from bitslib.user_manager import login_manager
-from bitslib.utils import debug_str
+from bitslib.utils import debug_str, str_to_digits
 from flask import (Flask, send_from_directory, render_template, redirect,
         request, url_for, flash)
 from flaskext.login import (login_user, login_required, logout_user,
@@ -69,17 +69,33 @@ def login():
 
 @app.route('/register', methods=["GET", "POST"])
 def register():
-    #TODO: Needs some work
-    form = RegistrationForm()
-    if form.validate_on_submit():
-        try:
-            db.session.add(User(form.email, form.username, form.password,
-                form.name, form.phone))
-            flash("Registration complete. Now try loggin in.")
-            return redirect(request.args.get("next") or url_for("login"))
-        except:
-            flash("Invalid Username/Password")
-    return render_template("login.html", form=form)
+    if not current_user.is_active():
+        to_page = request.args.get("next")
+        if to_page == url_for("logout"):
+            to_page = False
+        form = RegistrationForm()
+        if form.is_submitted():
+            if form.validate():
+                try:
+                    db.session.add(User(form.email.data,
+                        form.username.data, form.password.data, form.name.data,
+                        str_to_digits(form.phone.data)))
+                    db.session.commit()
+                    flash("Congratualtions, " + (form.name.data or
+                        form.username.data) + "! You have registered\
+                                successfully!", "success")
+                    return redirect(to_page or url_for("index"))
+                except:
+                    flash("We're sorry, we were unable to register you. Feel\
+                            free to try again.", "error")
+            else:
+                for key, msg in form.errors.items():
+                    flash("Could not validate " + key + ": " + ", ".join(msg),
+                            "error")
+        return render_template("register.html", form=form)
+    else:
+        flash("You are already logged in!", "info")
+        return redirect(request.args.get("next") or url_for("index"))
 
 
 @app.route('/search')

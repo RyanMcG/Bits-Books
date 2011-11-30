@@ -19,10 +19,12 @@ class RegistrationForm(LoginForm):
         validators.Length(min=6, max=64),
         validators.Email(u'Invalid Email Address')
     ])
-    name = TextField('Full Name (Optional)',
-            [validators.Length(min=2, max=64)])
-    phone = TextField('Phone Number',
-            [validators.Length(min=5, max=20)])
+    name = TextField('Full Name (Optional)', [
+        validators.Optional(),
+        validators.Length(min=2, max=64)])
+    phone = TextField('Phone Number', [
+        validators.Optional(),
+        validators.Length(min=5, max=20)])
     password = PasswordField('New Password', [
         validators.Required(),
         validators.EqualTo('confirm', message='Passwords must match')
