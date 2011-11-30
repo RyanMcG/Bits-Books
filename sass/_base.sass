@@ -10,10 +10,10 @@ $blueprint-background-color: #f9f9f9
 $blueprint-border-color: #ddd 
 
 //Set some custom colors
-$myred: #ae1f24
+$mycolor: #636363
 
-$link-color: lighten($myred, 12%) 
-$link-hover-color: darken($myred, 12%)
+$link-color: lighten($mycolor, 12%) 
+$link-hover-color: darken($mycolor, 12%)
 
 @import blueprint
 @import blueprint/buttons
@@ -24,9 +24,11 @@ $blueprint-font-size: 13px
 
 @import compass/css3
 
+//Blueprint grid stuff
+$blueprint-grid-columns: 12
+
 //Uncomment the following for a liquid layout
-$blueprint-liquid-container-width: 86%
-@import blueprint/liquid
+//@import blueprint/liquid
 
 //Start Styling
 $logo_font: "Inconsolata"
@@ -39,7 +41,7 @@ $header-font: "Copse", $blueprint-font-family
   +background-image(linear-gradient(center top, #f0f0f0 5%, #e3e3e3 100%))
   background-color: #ededed
   border: 1px solid #dcdcdc
-  $button_text_color: desaturate($myred, 23%)
+  $button_text_color: desaturate($mycolor, 23%)
   color: $button_text_color
   &:hover
     +background-image(linear-gradient(center top, #e3e3e3 5%, #f0f0f0 100%))

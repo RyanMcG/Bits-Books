@@ -12,32 +12,36 @@
     {% endblock -%}
   </head>
   <body class='bp'>
-    <div id='header'>
-      {%- block header %}{% endblock -%}
-    </div>
     <div id='container'>
-      {% block flashy %}
-        {% with messages = get_flashed_messages(with_categories=True) %}
-          {% if messages %}
-            <ul class=flashes>
-              {% for category, message in messages %}
-                <li class="{{ category }}">{{ message }}</li>
-              {% endfor %}
-            </ul>
-          {% endif %}
-        {% endwith %}
-      {% endblock %}
-      {%- block container %}
-      <div id='content'>
-        {%- block content %}{% endblock -%}
+      <div id='header'>
+        {%- block header %}
+        <h1>{% block headertitle %}Bits &amp; Books{% endblock %}</h1>
+        {% endblock -%}
       </div>
-      <div id='sidebar'>
-        {%- block sidebar %}{% endblock -%}
+      <ul id="navigation">
+        {%- block navigation %}
+        <li><a href="">Register</a></li>
+        {% endblock -%}
+      </ul>
+        {% block flashy %}
+          {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+              <ul class=flashes>
+                {% for category, message in messages %}
+                  <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          {% endwith %}
+        {% endblock %}
+        {%- block container %}
+        <div id='content'>
+          {%- block content %}{% endblock -%}
+        </div>
+        {% endblock -%}
+      <div id='footer'>
+          {%- block footer %}{% endblock -%}
       </div>
-      {% endblock -%}
-    </div>
-    <div id='footer'>
-        {%- block footer %}{% endblock -%}
     </div>
   </body>
 </html>

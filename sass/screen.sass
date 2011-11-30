@@ -12,46 +12,50 @@ body.bp
 #container
   +container
 
-#header, #footer
-  width: 100%
-
 #header
+  +column(12, true)
   h1
     font-size: 4em
-    color: $myred
+    color: $mycolor
     font-family: $logo_font, $header-font
-    margin-bottom: .2em
+    padding: 0 .2em
+    text-align: left
+    line-height: 1.2em
+    margin: .5em 0 0
+
+ul#navigation
+  +column(12, true)
+  list-style-type: none
+  margin: 3em 0 0
+  padding: 0
+  li
     text-align: center
-    line-height: 2em
-    span.tag
-      font-size: 1.4em
-  ul.relevant-links
-    +container
-    padding: 0
-    li
-      text-align: center
-      +float-right
-      margin: 0
-      &.last
-        +last
-      a
-        +pretty-button
+    margin: 0
+    &.last
+      +last
+    a
+      +pretty-button
+
+#container ul.flashes
+  margin: 0
+  padding: 0
+  +column(12, true)
+  list-style-type: none
+
+  li
+    +border-radius
 
 #content
-  +column(18)
-  +push(3)
-  +append(3)
+  +column(12, true)
   .section
-    $spacing: .5em
+    $spacing: 1em
     h2
       margin-bottom: 0
     .content
-      background: #e6e6e6
-      border: 1px solid #f0f0f0
+      background: lighten($blueprint-border-color, 20%)
+      border: 1px dashed $blueprint-border-color
       margin: 0 0 $spacing
       padding: $spacing
-      +box-shadow(darken(#e6e6e6, 30%) 0 0 $spacing * .7 inset)
-      +border-radius($spacing)
       p
         margin: 0
 
