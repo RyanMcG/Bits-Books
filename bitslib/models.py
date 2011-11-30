@@ -79,7 +79,7 @@ class Billing(db.Model):
 class Book(db.Model):
     __tablename__ = 'Book'
 
-    __table_args__ = {}
+    __table_args__ = {}  
 
     #column definitions
     date_created = db.Column(u'date_created', db.DateTime(), nullable=False)
@@ -90,6 +90,15 @@ class Book(db.Model):
     publisher_id = db.Column(u'publisher_id', db.Integer(),
             db.ForeignKey('Publisher.id'))
     title = db.Column(u'title', db.String(length=64), nullable=False)
+
+    def __init__(self, isbn, title, price):
+        current_time = now().strftime("%Y-%m-%d %H:%M")
+        self.date_created = current_time
+        self.date_modified = current_time
+        self.isbn = isbn
+        self.title = title
+        self.price = price
+        
 
     #db.relationship definitions
     Publisher = db.relationship('Publisher',
@@ -297,7 +306,16 @@ class Publisher(db.Model):
     id = db.Column(u'id', db.Integer(), primary_key=True, nullable=False)
     name = db.Column(u'name', db.String(length=32), nullable=False)
     state = db.Column(u'state', db.String(length=20))
-
+    
+    def __init__(self, name, city, state, country, est_date):
+        self.name = name
+        self.city = city
+        self.state = state
+        self.country = country
+        self.established_date = est_date
+	current_time = now().strftime("%Y-%m-%d %H:%M")
+        date_created = current_time
+        date_modified = current_time 
 
 class User(db.Model):
     __tablename__ = 'User'
