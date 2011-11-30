@@ -86,7 +86,8 @@ class Book(db.Model):
     date_modified = db.Column(u'date_modified', db.DateTime(), nullable=False)
     id = db.Column(u'id', db.Integer(), primary_key=True, nullable=False)
     isbn = db.Column(u'isbn', db.Integer(), nullable=False, unique=True)
-    price = db.Column(u'price', db.Float(precision=7, scale=2), nullable=False)
+    price = db.Column(u'price', db.DECIMAL(precision=7, scale=2),
+            nullable=False)
     publisher_id = db.Column(u'publisher_id', db.Integer(),
             db.ForeignKey('Publisher.id'))
     title = db.Column(u'title', db.String(length=64), nullable=False)
@@ -212,7 +213,7 @@ class InventoryOrder(db.Model):
     __table_args__ = {}
 
     #column definitions
-    cost = db.Column(u'cost', db.Float(precision=7, scale=2), nullable=False)
+    cost = db.Column(u'cost', db.DECIMAL(precision=7, scale=2), nullable=False)
     cur_quantity = db.Column(u'cur_quantity', db.Integer(), nullable=False)
     date_created = db.Column(u'date_created', db.DateTime(), nullable=False)
     date_modified = db.Column(u'date_modified', db.DateTime(), nullable=False)
@@ -232,11 +233,11 @@ class Order(db.Model):
     id = db.Column(u'id', db.Integer(), primary_key=True, nullable=False)
     user_id = db.Column(u'user_id', db.Integer(), db.ForeignKey('User.id'))
     cart_id = db.Column(u'cart_id', db.Integer(), db.ForeignKey('Cart.id'))
-    subtotal = db.Column(u'subtotal', db.Float(precision=7, scale=2),
+    subtotal = db.Column(u'subtotal', db.DECIMAL(precision=7, scale=2),
             nullable=False)
-    shipping = db.Column(u'shipping', db.Float(precision=7, scale=2),
+    shipping = db.Column(u'shipping', db.DECIMAL(precision=7, scale=2),
             nullable=False)
-    tax = db.Column(u'tax', db.Float(precision=7, scale=2), nullable=False)
+    tax = db.Column(u'tax', db.DECIMAL(precision=7, scale=2), nullable=False)
     status = db.Column(u'status', db.String(length=10), nullable=False)
     date_created = db.Column(u'date_created', db.DateTime(), nullable=False)
     date_modified = db.Column(u'date_modified', db.DateTime(), nullable=False)
@@ -253,8 +254,9 @@ class OrderItem(db.Model):
     order_id = db.Column(u'order_id', db.Integer(), db.ForeignKey('Order.id'))
     book_id = db.Column(u'book_id', db.Integer(), db.ForeignKey('Book.id'))
     quantity = db.Column(u'quantity', db.Integer())
-    cost = db.Column(u'cost', db.Float(precision=7, scale=2), nullable=False)
-    price = db.Column(u'price', db.Float(precision=7, scale=2), nullable=False)
+    cost = db.Column(u'cost', db.DECIMAL(precision=7, scale=2), nullable=False)
+    price = db.Column(u'price', db.DECIMAL(precision=7, scale=2),
+            nullable=False)
     status = db.Column(u'status', db.String(length=10), nullable=False)
     date_created = db.Column(u'date_created', db.DateTime(), nullable=False)
     date_modified = db.Column(u'date_modified', db.DateTime(), nullable=False)
@@ -272,7 +274,8 @@ class OrderPayment(db.Model):
     order_id = db.Column(u'order_id', db.Integer(), db.ForeignKey('Order.id'))
     billing_id = db.Column(u'billing_id', db.Integer(),
             db.ForeignKey('Billing.id'))
-    price = db.Column(u'price', db.Float(precision=7, scale=2), nullable=False)
+    price = db.Column(u'price', db.DECIMAL(precision=7, scale=2),
+            nullable=False)
     date_created = db.Column(u'date_created', db.DateTime(), nullable=False)
     date_modified = db.Column(u'date_modified', db.DateTime(), nullable=False)
 
@@ -329,8 +332,9 @@ class User(db.Model):
         self.authenticated = False
 
     def __repr__(self):
-        return "<User id: {id}, username: {usn}, name: {name}>".format(
-                id=self.id, name=self.name, usn=self.username)
+        return "<User id: {id}, username: {usn}, name: {name}, authed: \
+            {auth}>".format(id=self.id, name=self.name, usn=self.username,
+                    auth=self.authenticated)
 
     #Methods for Flask-Login
 

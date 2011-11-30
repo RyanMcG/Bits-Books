@@ -7,7 +7,7 @@ class LoginForm(Form):
     username = TextField('Username', [
         validators.Required(),
         validators.Length(min=4, max=32)])
-    password = PasswordField('New Password', [
+    password = PasswordField('Password', [
         validators.Required(),
         ])
     remember_me = BooleanField('Remember me?')

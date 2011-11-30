@@ -16,7 +16,8 @@ CREATE TABLE Book (
   price DECIMAL(7,2) NOT NULL,
   date_created DATETIME NOT NULL,
   date_modified DATETIME NOT NULL,
-  PRIMARY KEY(id)
+  PRIMARY KEY(id),
+  UNIQUE (isbn)
 );
 
 -- Publisher
@@ -68,7 +69,8 @@ CREATE TABLE Category (
   name VARCHAR(32) UNIQUE NOT NULL,
   date_created DATETIME NOT NULL,
   date_modified DATETIME NOT NULL,
-  PRIMARY KEY(id)
+  PRIMARY KEY(id),
+  UNIQUE (name)
 );
 
 -- Inventory
@@ -165,7 +167,9 @@ CREATE TABLE `User` (
   phone INT(15),
   date_created DATETIME NOT NULL,
   date_modified DATETIME NOT NULL,
-  PRIMARY KEY(id)
+  PRIMARY KEY(id),
+  UNIQUE (email),
+  UNIQUE (username)
 );
 
 -- Admin
@@ -227,5 +231,6 @@ CREATE TABLE Giftcard (
   pin INT(4) NOT NULL,
   date_created DATETIME NOT NULL,
   date_modified DATETIME NOT NULL,
-  PRIMARY KEY(id)
+  PRIMARY KEY(id),
+  UNIQUE (`number`)
 );
