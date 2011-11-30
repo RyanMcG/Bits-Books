@@ -1,0 +1,47 @@
+//Import font for logo
+@import url(http://fonts.googleapis.com/css?family=Copse|Inconsolata)
+
+// This import applies a global reset to any page that imports this stylesheet.
+@import blueprint/reset
+
+// Import all the default blueprint modules so that we can access their mixins.
+$alt-text-color: #cccccc 
+$blueprint-background-color: #f9f9f9 
+$blueprint-border-color: #ddd 
+
+//Set some custom colors
+$myred: #ae1f24
+
+$link-color: lighten($myred, 12%) 
+$link-hover-color: darken($myred, 12%)
+
+@import blueprint
+@import blueprint/buttons
+
+$blueprint-font-family: DejaVu Sans, Helvetica, Arial, sans-serif
+$blueprint-fixed-font-family: 'Inconsolata', DejaVu Sans Mono, "andale mono", Courier, monospace
+$blueprint-font-size: 13px
+
+@import compass/css3
+
+//Uncomment the following for a liquid layout
+$blueprint-liquid-container-width: 86%
+@import blueprint/liquid
+
+//Start Styling
+$logo_font: "Inconsolata"
+$header-font: "Copse", $blueprint-font-family
+
+@mixin pretty-button()
+  +anchor-button
+  +box-shadow(inset 0px 1px 0px 0px #ffffff)
+  +border-radius(6px)
+  +background-image(linear-gradient(center top, #f0f0f0 5%, #e3e3e3 100%))
+  background-color: #ededed
+  border: 1px solid #dcdcdc
+  $button_text_color: desaturate($myred, 23%)
+  color: $button_text_color
+  &:hover
+    +background-image(linear-gradient(center top, #e3e3e3 5%, #f0f0f0 100%))
+    background-color: #dfdfdf
+    color: $button_text_color

@@ -98,7 +98,6 @@ CREATE TABLE InventoryOrder (
 CREATE TABLE Cart (
   id INT(13) NOT NULL AUTO_INCREMENT,
   user_id INT(13),
-  order_id INT(13),
   status VARCHAR(10) NOT NULL,
   date_created DATETIME NOT NULL,
   date_modified DATETIME NOT NULL,
@@ -121,6 +120,7 @@ CREATE TABLE CartItem (
 CREATE TABLE `Order` (
   id INT(13) NOT NULL AUTO_INCREMENT,
   user_id INT(13),
+  cart_id INT(13),
   subtotal DECIMAL(7,2) NOT NULL,
   shipping DECIMAL(7,2) NOT NULL,
   tax DECIMAL(7,2) NOT NULL,

@@ -109,12 +109,8 @@ class Cart(db.Model):
     date_created = db.Column(u'date_created', db.DateTime(), nullable=False)
     date_modified = db.Column(u'date_modified', db.DateTime(), nullable=False)
     id = db.Column(u'id', db.Integer(), primary_key=True, nullable=False)
-    order_id = db.Column(u'order_id', db.Integer(), db.ForeignKey('Order.id'))
     user_id = db.Column(u'user_id', db.Integer(), db.ForeignKey('User.id'))
     status = db.Column(u'status', db.String(length=10), nullable=False)
-
-    #db.relationship definitions
-    Order = db.relationship('Order', primaryjoin='Cart.order_id==Order.id')
 
 
 class CartItem(db.Model):

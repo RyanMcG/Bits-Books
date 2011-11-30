@@ -98,11 +98,11 @@ these are covered in the Heroku instructions referenced above).
         pip install -r requirements.txt
 
 5.  Before we can run the application we must make it aware of the database.
-    Copy the `database-example.yml` file to `database.yml` with the following
+    Copy the `config-example.yml` file to `config.yml` with the following
     commands and edit it accordingly.
 
-        cp database-example.yml database.yml
-        $EDITOR database.yml
+        cp config-example.yml config.yml
+        $EDITOR config.yml
 
 6.  That's it! To start the app just run:
 
