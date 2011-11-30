@@ -97,8 +97,6 @@ these are covered in the Heroku instructions referenced above).
 
         pip install -r requirements.txt
 
-    *NOTE: you might also have to install `mysql-python` with pip*
-
 5.  Before we can run the application we must make it aware of the database.
     Copy the `config-example.yml` file to `config.yml` with the following
     commands and edit it accordingly.
