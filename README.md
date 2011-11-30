@@ -10,10 +10,10 @@ Flask front-end for CSE 670 Database project.
 ### Technologies Used:
 
 * Python
-  * Flask
-    * Gravatar
+    * Flask
+        * Gravatar
 * Compass and SASS
-  * blueprint/semantic
+    * blueprint/semantic
 * HAML
 * MySQL
 
@@ -87,11 +87,11 @@ these are covered in the Heroku instructions referenced above).
 
         cd /path/to/this/project/
         virtualenv --no-site-packages env
-        source env/bin/active
+        source env/bin/activate
 
     If you are using bash you can replace the last command with: 
 
-        . env/bin/active
+        . env/bin/activate
 
 4.  Install Flask and other dependencies.
 

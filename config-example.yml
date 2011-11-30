@@ -9,6 +9,6 @@ application:
 #   hostspec: <protocol>://<user>:<password>@<host>/<database name>
 databases:
   production:
-    hostspec: postgres://exuser:expass@example.exampleaws.com/somedbname
+    hostspec: favsql://exuser:expass@example.exampleaws.com/somedbname
   development:
     hostspec: mysql://bitbook:amazon@localhost/bitbook
