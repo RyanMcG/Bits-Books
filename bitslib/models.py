@@ -39,6 +39,13 @@ class Admin(db.Model):
     level = db.Column(u'level', db.String(length=8), nullable=False)
     user_id = db.Column(u'user_id', db.Integer(), db.ForeignKey('User.id'))
 
+    def __init__(self, level, user_id):
+        self.level = level
+        self.user_id = user_id
+        current_time = now().strftime("%Y-%m-%d %H:%M")
+        self.date_created = current_time
+        self.date_modified = current_time
+
     #db.relationship definitions
     User = db.relationship('User', primaryjoin='Admin.user_id==User.id',
             backref=db.backref('User', lazy='joined'))
@@ -59,7 +66,7 @@ class Author(db.Model):
     def __init__(self, name, b_date):
         current_time = now().strftime("%Y-%m-%d %H:%M")
         self.date_created = current_time
-        self.date_modified = now
+        self.date_modified = current_time
         self.name = name
         self.birth_date = b_date
 
@@ -136,6 +143,13 @@ class Cart(db.Model):
     user_id = db.Column(u'user_id', db.Integer(), db.ForeignKey('User.id'))
     status = db.Column(u'status', db.String(length=10), nullable=False)
 
+    def __init__(self, user_id, status):
+        self.user_id = user_id
+        self.status = status
+        current_time = now().strftime("%Y-%m-%d %H:%M")
+        self.date_created = current_time
+        self.date_modified = current_time
+
 
 class CartItem(db.Model):
     __tablename__ = 'CartItem'
@@ -149,6 +163,15 @@ class CartItem(db.Model):
     status = db.Column(u'status', db.String(length=10), nullable=False)
     date_created = db.Column(u'date_created', db.DateTime(), nullable=False)
     date_modified = db.Column(u'date_modified', db.DateTime(), nullable=False)
+
+    def __init__(self, cart_id, book_id, quantity, status):
+        self.cart_id = cart_id
+        self.book_id = book_id
+        self.quantity = quantity
+        self.status = status
+        current_time = now().strftime("%Y-%m-%d %H:%M")
+        self.date_created = current_time
+        self.date_modified = current_time
 
     #db.relationship definitions
     Book = db.relationship('Book', primaryjoin='CartItem.book_id==Book.id')

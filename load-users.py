@@ -1,4 +1,4 @@
-from bitslib.models import User as u, Creditcard as cc, Giftcard as gc, Billing as b, UserAddress as ua
+from bitslib.models import User as u, Creditcard as cc, Giftcard as gc, Billing as b, UserAddress as ua, Admin as a, Cart as c, CartItem as ci
 from web import db
 from datetime import datetime
 import random
@@ -51,9 +51,14 @@ class UserLoader():
 		db.session.commit()
 		
 	def loadAdmin(self):
-		admin1 = u('notwella@me.com','anotwell','loging','Alex Notwell','5174031662')
+		admin1 = u('notwella@me.com','anotwell','login','Alex Notwell','5174031662')
 		db.session.add(admin1)
 		db.session.commit()
+		levels = ['basic', 'admin', 'staff']
+		for user in u.query.all():
+			new_admin = a(random.randrange(0, 3), user.id)
+			db.session.add(new_admin)
+			db.session.commit()
 	
 	def loadBilling(self):
 		now = datetime.now
@@ -556,6 +561,23 @@ class UserLoader():
 		gc6 = gc(billing7.id, 847586974321565234234354, 5687)
 		db.session.add(gc6)
 		db.session.commit()
+
+	def loadCarts(self):
+		for user in u.query.all():
+			new_cart = c(user.id, 'Open')
+			
+			book_id = 0
+			for book in b.query.all():
+				prev = book_id
+				book_id = book.id
+				if random.randrange(0,2)==0:
+					book_id = prev
+
+			new_item = ci(new_cart.id, book_id, random.randrange(1, 5), 'OK')
+			
+			db.session.add(new_cart)
+			db.session.add(new_item)
+			db.session.commit()
 		
 
 if __name__=='__main__':
@@ -563,3 +585,4 @@ if __name__=='__main__':
 	loader.load()
 	loader.loadAdmin()
 	loader.loadBilling()
+	loader.loadCarts()
