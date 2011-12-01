@@ -11,20 +11,20 @@ now = datetime.now
 #Setup helper tables
 
 Book_Author = db.Table(u'Book_Author',
-    db.Column(u'id', db.Integer(), primary_key=True, nullable=False),
-    db.Column(u'book_id', db.Integer(), db.ForeignKey('Book.id')),
-    db.Column(u'author_id', db.Integer(), db.ForeignKey('Author.id')),
-    db.Column(u'date_created', db.DateTime(), nullable=False),
-    db.Column(u'date_modified', db.DateTime(), nullable=False),
-)
+        db.Column(u'id', db.Integer(), primary_key=True, nullable=False),
+        db.Column(u'book_id', db.Integer(), db.ForeignKey('Book.id')),
+        db.Column(u'author_id', db.Integer(), db.ForeignKey('Author.id')),
+        db.Column(u'date_created', db.DateTime(), nullable=False),
+        db.Column(u'date_modified', db.DateTime(), nullable=False),
+        )
 
 Book_Category = db.Table(u'Book_Category',
-    db.Column(u'id', db.Integer(), primary_key=True, nullable=False),
-    db.Column(u'book_id', db.Integer(), db.ForeignKey('Book.id')),
-    db.Column(u'category_id', db.Integer(), db.ForeignKey('Category.id')),
-    db.Column(u'date_created', db.DateTime(), nullable=False),
-    db.Column(u'date_modified', db.DateTime(), nullable=False),
-)
+        db.Column(u'id', db.Integer(), primary_key=True, nullable=False),
+        db.Column(u'book_id', db.Integer(), db.ForeignKey('Book.id')),
+        db.Column(u'category_id', db.Integer(), db.ForeignKey('Category.id')),
+        db.Column(u'date_created', db.DateTime(), nullable=False),
+        db.Column(u'date_modified', db.DateTime(), nullable=False),
+        )
 
 
 class Admin(db.Model):
@@ -100,7 +100,7 @@ class Billing(db.Model):
 class Book(db.Model):
     __tablename__ = 'Book'
 
-    __table_args__ = {}  
+    __table_args__ = {}
 
     #column definitions
     date_created = db.Column(u'date_created', db.DateTime(), nullable=False)
@@ -121,7 +121,6 @@ class Book(db.Model):
         self.title = title
         self.price = price
         self.publisher_id = pub_id
-        
 
     #db.relationship definitions
     Publisher = db.relationship('Publisher',
@@ -216,7 +215,8 @@ class Creditcard(db.Model):
     date_created = db.Column(u'date_created', db.DateTime(), nullable=False)
     date_modified = db.Column(u'date_modified', db.DateTime(), nullable=False)
 
-    def __init__(self, name, address_id, billing_id, cc_number, sec_number, exp_date):
+    def __init__(self, name, address_id, billing_id, cc_number, sec_number,
+            exp_date):
         self.address_id = address_id
         self.billing_id = billing_id
         self.name = name
@@ -396,7 +396,6 @@ class OrderPayment(db.Model):
         self.date_created = current_time
         self.date_modified = current_time
 
-
     #db.relationship definitions
     Order = db.relationship('Order',
             primaryjoin='OrderPayment.order_id==Order.id')
@@ -418,16 +417,17 @@ class Publisher(db.Model):
     id = db.Column(u'id', db.Integer(), primary_key=True, nullable=False)
     name = db.Column(u'name', db.String(length=32), nullable=False)
     state = db.Column(u'state', db.String(length=20))
-    
+
     def __init__(self, name, city, state, country, est_date):
         self.name = name
         self.city = city
         self.state = state
         self.country = country
         self.established_date = est_date
-	current_time = now().strftime("%Y-%m-%d %H:%M")
+        current_time = now().strftime("%Y-%m-%d %H:%M")
         self.date_created = current_time
-        self.date_modified = current_time 
+        self.date_modified = current_time
+
 
 class User(db.Model):
     __tablename__ = 'User'
@@ -463,7 +463,7 @@ class User(db.Model):
                 id=self.id, name=self.name, usn=self.username,
                 auth=self.authenticated)
 
-    #Methods for Flask-Login
+        #Methods for Flask-Login
 
     def get_id(self):
         return unicode(self.id)
