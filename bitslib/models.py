@@ -56,6 +56,13 @@ class Author(db.Model):
     id = db.Column(u'id', db.Integer(), primary_key=True, nullable=False)
     name = db.Column(u'name', db.String(length=32), nullable=False)
 
+    def __init__(self, name, b_date):
+        current_time = now().strftime("%Y-%m-%d %H:%M")
+        self.date_created = current_time
+        self.date_modified = now
+        self.name = name
+        self.birth_date = b_date
+
     #db.relationship definitions
     Books = db.relationship('Book', secondary=Book_Author)
 
@@ -71,6 +78,13 @@ class Billing(db.Model):
     id = db.Column(u'id', db.Integer(), primary_key=True, nullable=False)
     type = db.Column(u'type', db.String(length=12))
     user_id = db.Column(u'user_id', db.Integer(), db.ForeignKey('User.id'))
+
+    def __init__(self, type, user_id):
+        self.type = type
+        self.user_id = user_id
+        current_time = now().strftime("%Y-%m-%d %H:%M")
+        self.date_created = current_time
+        self.date_modified = current_time
 
     #db.relationship definitions
     User = db.relationship('User', primaryjoin='Billing.user_id==User.id')
@@ -91,13 +105,14 @@ class Book(db.Model):
             db.ForeignKey('Publisher.id'))
     title = db.Column(u'title', db.String(length=64), nullable=False)
 
-    def __init__(self, isbn, title, price):
+    def __init__(self, isbn, title, price, pub_id):
         current_time = now().strftime("%Y-%m-%d %H:%M")
         self.date_created = current_time
         self.date_modified = current_time
         self.isbn = isbn
         self.title = title
         self.price = price
+        self.publisher_id = pub_id
         
 
     #db.relationship definitions
@@ -152,6 +167,12 @@ class Category(db.Model):
     name = db.Column(u'name', db.String(length=32), nullable=False,
             unique=True)
 
+    def __init__(self, name):
+        self.name = name
+        current_time = now().strftime("%Y-%m-%d %H:%M")
+        self.date_created = current_time
+        self.date_modified = current_time
+
     #db.relationship definitions
     Books = db.relationship('Book', secondary=Book_Category)
 
@@ -170,6 +191,17 @@ class Creditcard(db.Model):
     exp_date = db.Column(u'exp_date', db.Date(), nullable=False)
     date_created = db.Column(u'date_created', db.DateTime(), nullable=False)
     date_modified = db.Column(u'date_modified', db.DateTime(), nullable=False)
+
+    def __init__(self, name, address_id, billing_id, cc_number, sec_number, exp_date):
+        self.address_id = address_id
+        self.billing_id = billing_id
+        self.name = name
+        self.cc_number = cc_number
+        self.sec_number = sec_number
+        self.exp_date = exp_date
+        current_time = now().strftime("%Y-%m-%d %H:%M")
+        self.date_created = current_time
+        self.date_modified = current_time
 
     #db.relationship definitions
     UserAddress = db.relationship('UserAddress',
@@ -193,6 +225,14 @@ class Giftcard(db.Model):
             unique=True)
     pin = db.Column(u'pin', db.Integer(), nullable=False)
 
+    def __init__(self, billing_id, number, pin):
+        self.billing_id = billing_id
+        self.number = number
+        self.pin = pin
+        current_time = now().strftime("%Y-%m-%d %H:%M")
+        self.date_created = current_time
+        self.date_modified = current_time
+
     #db.relationship definitions
     Billing = db.relationship('Billing',
             primaryjoin='Giftcard.billing_id==Billing.id')
@@ -210,6 +250,14 @@ class Inventory(db.Model):
     id = db.Column(u'id', db.Integer(), primary_key=True, nullable=False)
     quantity = db.Column(u'quantity', db.Integer(), nullable=False)
     status = db.Column(u'status', db.String(length=10), nullable=False)
+
+    def __init__(self, book_id, quantity, status):
+        self.book_id = book_id
+        self.quantity = quantity
+        self.status = status
+        current_time = now().strftime("%Y-%m-%d %H:%M")
+        self.date_created = current_time
+        self.date_modified = current_time
 
     #db.relationship definitions
     Book = db.relationship('Book', primaryjoin='Inventory.book_id==Book.id')
@@ -229,6 +277,15 @@ class InventoryOrder(db.Model):
     inventory_id = db.Column(u'inventory_id', db.Integer(),
             db.ForeignKey('Inventory.id'))
     orig_quantity = db.Column(u'orig_quantity', db.Integer(), nullable=False)
+
+    def __init__(self, cost, cur_quantity, inv_id, orig_quant):
+        self.cost = cost
+        self.cur_quantity = cur_quantity
+        self.inventory_id = inv_id
+        self.orig_quantity = orig_quant
+        current_time = now().strftime("%Y-%m-%d %H:%M")
+        self.date_created = current_time
+        self.date_modified = current_time
 
     #db.relationship definitions
     Inventory = db.relationship('Inventory',
@@ -314,8 +371,8 @@ class Publisher(db.Model):
         self.country = country
         self.established_date = est_date
 	current_time = now().strftime("%Y-%m-%d %H:%M")
-        date_created = current_time
-        date_modified = current_time 
+        self.date_created = current_time
+        self.date_modified = current_time 
 
 class User(db.Model):
     __tablename__ = 'User'
@@ -397,6 +454,7 @@ class UserAddress(db.Model):
         self.state = state
         self.zip = zip
         self.country = country
+        self.status = 'OK'
         current_time = now().strftime("%Y-%m-%d %H:%M")
         self.date_created = current_time
         self.date_modified = current_time

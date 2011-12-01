@@ -4,7 +4,7 @@ from web import db
 class InventoryOrderLoader():
 	def load(self):
 		for item in i.query.all():
-			if item.quantity < 10:
+			if item.quantity < 50:
 				i.status = 'Ordered'
 				new_cost = 0
 				quant = 0
