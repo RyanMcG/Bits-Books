@@ -172,80 +172,84 @@ class UserLoader():
 		db.session.add(billing1)
 		db.session.commit()
 		
-		billing2 = b('Creditcard', selected_user.id)
+		billing2 = b('Giftcard', selected_user.id)
 		db.session.add(billing2)
 		db.session.commit()
 		
-		billing3 = b('Creditcard', selected_user.id)
+		billing3 = b('Giftcard', selected_user.id)
 		db.session.add(billing3)
 		db.session.commit()
 		
-		billing4 = b('Creditcard', selected_user.id)
+		billing4 = b('Giftcard', selected_user.id)
 		db.session.add(billing4)
 		db.session.commit()
 		
-		billing5 = b('Creditcard', selected_user.id)
+		billing5 = b('Giftcard', selected_user.id)
 		db.session.add(billing5)
 		db.session.commit()
 		
-		billing6 = b('Creditcard', selected_user.id)
+		billing6 = b('Giftcard', selected_user.id)
 		db.session.add(billing6)
 		db.session.commit()
 		
-		billing7 = b('Creditcard', selected_user.id)
+		billing7 = b('Giftcard', selected_user.id)
 		db.session.add(billing7)
 		db.session.commit()
 		
-		billing8 = b('Creditcard', selected_user.id)
+		billing8 = b('Giftcard', selected_user.id)
 		db.session.add(billing8)
 		db.session.commit()
 		
-		billing9 = b('Creditcard', selected_user.id)
+		billing9 = b('Giftcard', selected_user.id)
 		db.session.add(billing9)
 		db.session.commit()
 		
-		billing10 = b('Creditcard', selected_user.id)
+		billing10 = b('Giftcard', selected_user.id)
 		db.session.add(billing10)
 		db.session.commit()
 		
-		billing11 = b('Creditcard', selected_user.id)
+		billing11 = b('Giftcard', selected_user.id)
 		db.session.add(billing11)
 		db.session.commit()
 		
-		billing12 = b('Creditcard', selected_user.id)
+		billing12 = b('Giftcard', selected_user.id)
 		db.session.add(billing12)
 		db.session.commit()
 		
-		billing13 = b('Creditcard', selected_user.id)
+		billing13 = b('Giftcard', selected_user.id)
 		db.session.add(billing13)
 		db.session.commit()
 		
-		billing14 = b('Creditcard', selected_user.id)
+		billing14 = b('Giftcard', selected_user.id)
 		db.session.add(billing14)
 		db.session.commit()
 		
-		billing15 = b('Creditcard', selected_user.id)
+		billing15 = b('Giftcard', selected_user.id)
 		db.session.add(billing15)
 		db.session.commit()
 		
-		billing16 = b('Creditcard', selected_user.id)
+		billing16 = b('Giftcard', selected_user.id)
 		db.session.add(billing16)
 		db.session.commit()
 		
-		billing17 = b('Creditcard', selected_user.id)
+		billing17 = b('Giftcard', selected_user.id)
 		db.session.add(billing17)
 		db.session.commit()
 		
-		billing18 = b('Creditcard', selected_user.id)
+		billing18 = b('Giftcard', selected_user.id)
 		db.session.add(billing18)
 		db.session.commit()
 		
-		billing19 = b('Creditcard', selected_user.id)
+		billing19 = b('Giftcard', selected_user.id)
 		db.session.add(billing19)
 		db.session.commit()
 		
-		billing20 = b('Creditcard', selected_user.id)
+		billing20 = b('Giftcard', selected_user.id)
 		db.session.add(billing20)
+		db.session.commit()
+		
+		billing21 = b('Giftcard', selected_user.id)
+		db.session.add(billing21)
 		db.session.commit()
 		
 		cc1 = cc(selected_user.name, addr1.id, billing1.id, 4339565245438765, 208, time)
@@ -256,79 +260,79 @@ class UserLoader():
 		db.session.add(gc2)
 		db.session.commit()
 		
-		gc3 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		gc3 = gc(billing3.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
 		db.session.add(gc3)
 		db.session.commit()
 		
-		gc4 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		gc4 = gc(billing4.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
 		db.session.add(gc4)
 		db.session.commit()
 		
-		gc5 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		gc5 = gc(billing5.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
 		db.session.add(gc5)
 		db.session.commit()
 		
-		gc6 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		gc6 = gc(billing6.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
 		db.session.add(gc6)
 		db.session.commit()
 		
-		gc7 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		gc7 = gc(billing7.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
 		db.session.add(gc7)
 		db.session.commit()
 		
-		gc8 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		gc8 = gc(billing8.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
 		db.session.add(gc8)
 		db.session.commit()
 		
-		gc9 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		gc9 = gc(billing9.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
 		db.session.add(gc9)
 		db.session.commit()
 		
-		gc10 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		gc10 = gc(billing10.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
 		db.session.add(gc10)
 		db.session.commit()
 		
-		gc11 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		gc11 = gc(billing11.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
 		db.session.add(gc11)
 		db.session.commit()
 		
-		gc12 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		gc12 = gc(billing12.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
 		db.session.add(gc12)
 		db.session.commit()
 		
-		gc13 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		gc13 = gc(billing13.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
 		db.session.add(gc13)
 		db.session.commit()
 		
-		gc14 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		gc14 = gc(billing14.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
 		db.session.add(gc14)
 		db.session.commit()
 		
-		gc15 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		gc15 = gc(billing15.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
 		db.session.add(gc15)
 		db.session.commit()
 		
-		gc16 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		gc16 = gc(billing16.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
 		db.session.add(gc16)
 		db.session.commit()
 		
-		gc17 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		gc17 = gc(billing17.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
 		db.session.add(gc17)
 		db.session.commit()
 		
-		gc18 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		gc18 = gc(billing18.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
 		db.session.add(gc18)
 		db.session.commit()
 		
-		gc19 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		gc19 = gc(billing19.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
 		db.session.add(gc19)
 		db.session.commit()
 		
-		gc20 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		gc20 = gc(billing20.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
 		db.session.add(gc20)
 		db.session.commit()
 		
-		gc21 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		gc21 = gc(billing21.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
 		db.session.add(gc21)
 		db.session.commit()
 		
@@ -406,31 +410,31 @@ class UserLoader():
 		db.session.add(cc1)
 		db.session.commit()
 		
-		cc2 = cc(selected_user.name, addr2.id, billing1.id, 4321565245448596, 903, time)
+		cc2 = cc(selected_user.name, addr2.id, billing2.id, 4321565245448596, 903, time)
 		db.session.add(cc2)
 		db.session.commit()
 		
-		cc3 = cc(selected_user.name, addr3.id, billing1.id, 4321565245448596, 903, time)
+		cc3 = cc(selected_user.name, addr3.id, billing3.id, 4321565245448596, 903, time)
 		db.session.add(cc3)
 		db.session.commit()
 		
-		cc4 = cc(selected_user.name, addr4.id, billing1.id, 4321565245448596, 903, time)
+		cc4 = cc(selected_user.name, addr4.id, billing4.id, 4321565245448596, 903, time)
 		db.session.add(cc4)
 		db.session.commit()
 		
-		cc5 = cc(selected_user.name, addr5.id, billing1.id, 4321565245448596, 903, time)
+		cc5 = cc(selected_user.name, addr5.id, billing5.id, 4321565245448596, 903, time)
 		db.session.add(cc5)
 		db.session.commit()
 		
-		cc6 = cc(selected_user.name, addr6.id, billing1.id, 4321565245448596, 903, time)
+		cc6 = cc(selected_user.name, addr6.id, billing6.id, 4321565245448596, 903, time)
 		db.session.add(cc6)
 		db.session.commit()
 		
-		cc7 = cc(selected_user.name, addr7.id, billing1.id, 4321565245448596, 903, time)
+		cc7 = cc(selected_user.name, addr7.id, billing7.id, 4321565245448596, 903, time)
 		db.session.add(cc7)
 		db.session.commit()
 		
-		cc8 = cc(selected_user.name, addr8.id, billing1.id, 4321565245448596, 903, time)
+		cc8 = cc(selected_user.name, addr8.id, billing8.id, 4321565245448596, 903, time)
 		db.session.add(cc8)
 		db.session.commit()
 		
