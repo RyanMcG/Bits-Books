@@ -21,7 +21,7 @@ Flask front-end for CSE 670 Database project.
 
 ### Database Setup
 
-Setting up the database is a 4 step process. To start off you need to have
+Setting up the database is a multi step process. To start off you need to have
 the necessary permissions to create a database. Any value enclosed by angle
 brackets (e.g. <variable>) is a variable and should be replaced by the
 appropriate value.
@@ -47,11 +47,10 @@ the first command should not be used.
 
         mysql -u <bitbook user> -p <bitbook database> < create.sql
 
-3.  Load some data with the following command:
+3.  To use the built in data loaders you must first have the python application
+    setup properly.  This can be done by following the instructions below.
 
-        mysql -u <bitbook user> -p <bitbook database> < load.sql
-
-4.  Finish up by adding foreign keys.
+4.  After you have finished loading the data you may finalize the schema.
 
         mysql -u <bitbook user> -p <bitbook database> < finalize.sql
 
@@ -98,12 +97,29 @@ these are covered in the Heroku instructions referenced above).
 
 5.  Before we can run the application we must make it aware of the database.
     Copy the `config-example.yml` file to `config.yml` with the following
-    commands and edit it accordingly.
+    commands and edit it accordingly. *NOTE: Pay attention to what python to
+    mysql adapter you use. You might not get pymysql to work on your machine,
+    but something else might do the job.*
 
         cp config-example.yml config.yml
         $EDITOR config.yml
 
-6.  That's it! To start the app just run:
+6.  That's it! You probably want to load the data now. You can do this by
+    running the following commands: 
+
+        $ python load-users.py
+        $ python load-books.py
+        $ python load-inventory-orders.py
+
+    Once that's done you can now either use the application interactively:
+
+        $ python
+        ....
+        >>> from play import *
+        >>> #Now I can use the models and application to do whatever I want
+        >>> User.query.all() # This returns all the users in the database
+
+    Or you can start the web app:
 
         python web.py
  
