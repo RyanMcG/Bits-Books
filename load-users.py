@@ -1,6 +1,7 @@
 from bitslib.models import User as u, Creditcard as cc, Giftcard as gc, Billing as b, UserAddress as ua
 from web import db
 from datetime import datetime
+import random
 
 class UserLoader():
 	def load(self):
@@ -66,12 +67,28 @@ class UserLoader():
 		db.session.add(addr1)
 		db.session.commit()
 		
+		addr2 = ua(selected_user.id, selected_user.name, '2046 Bedford Road', '', 'Columbus', 'OH', '43212', 'United States')
+		db.session.add(addr2)
+		db.session.commit()
+		
+		addr3 = ua(selected_user.id, selected_user.name, '1800 King Avenue', '', 'Columbus', 'OH', '43212', 'United States')
+		db.session.add(addr3)
+		db.session.commit()
+		
 		billing1 = b('Creditcard', selected_user.id)
 		db.session.add(billing1)
 		db.session.commit()
 		
+		billing2 = b('Creditcard', selected_user.id)
+		db.session.add(billing2)
+		db.session.commit()
+		
 		cc1 = cc(selected_user.name, addr1.id, billing1.id, 4321543265437654, 123, time)
 		db.session.add(cc1)
+		db.session.commit()
+		
+		cc2 = cc(selected_user.name, addr2.id, billing2.id, 4321543265437654, 123, time)
+		db.session.add(cc2)
 		db.session.commit()
 		
 		# --------------------------------------------------------------------------------
@@ -82,6 +99,10 @@ class UserLoader():
 				
 		addr1 = ua(selected_user.id, selected_user.name, '1700 Essex Road', '', 'Columbus', 'OH', '43221', 'United States')
 		db.session.add(addr1)
+		db.session.commit()
+		
+		addr2 = ua(selected_user.id, selected_user.name, '203 3rd Avenue', 'Apt. 101', 'Columbus', 'OH', '43201', 'United States')
+		db.session.add(addr2)
 		db.session.commit()
 		
 		billing1 = b('Creditcard', selected_user.id)
@@ -120,6 +141,10 @@ class UserLoader():
 		db.session.add(addr1)
 		db.session.commit()
 		
+		addr2 = ua(selected_user.id, selected_user.name, '2403 Main Street', '', 'Columbus', 'OH', '43200', 'United States')
+		db.session.add(addr2)
+		db.session.commit()
+		
 		billing1 = b('Creditcard', selected_user.id)
 		db.session.add(billing1)
 		db.session.commit()
@@ -142,8 +167,164 @@ class UserLoader():
 		db.session.add(billing1)
 		db.session.commit()
 		
+		billing2 = b('Creditcard', selected_user.id)
+		db.session.add(billing2)
+		db.session.commit()
+		
+		billing3 = b('Creditcard', selected_user.id)
+		db.session.add(billing3)
+		db.session.commit()
+		
+		billing4 = b('Creditcard', selected_user.id)
+		db.session.add(billing4)
+		db.session.commit()
+		
+		billing5 = b('Creditcard', selected_user.id)
+		db.session.add(billing5)
+		db.session.commit()
+		
+		billing6 = b('Creditcard', selected_user.id)
+		db.session.add(billing6)
+		db.session.commit()
+		
+		billing7 = b('Creditcard', selected_user.id)
+		db.session.add(billing7)
+		db.session.commit()
+		
+		billing8 = b('Creditcard', selected_user.id)
+		db.session.add(billing8)
+		db.session.commit()
+		
+		billing9 = b('Creditcard', selected_user.id)
+		db.session.add(billing9)
+		db.session.commit()
+		
+		billing10 = b('Creditcard', selected_user.id)
+		db.session.add(billing10)
+		db.session.commit()
+		
+		billing11 = b('Creditcard', selected_user.id)
+		db.session.add(billing11)
+		db.session.commit()
+		
+		billing12 = b('Creditcard', selected_user.id)
+		db.session.add(billing12)
+		db.session.commit()
+		
+		billing13 = b('Creditcard', selected_user.id)
+		db.session.add(billing13)
+		db.session.commit()
+		
+		billing14 = b('Creditcard', selected_user.id)
+		db.session.add(billing14)
+		db.session.commit()
+		
+		billing15 = b('Creditcard', selected_user.id)
+		db.session.add(billing15)
+		db.session.commit()
+		
+		billing16 = b('Creditcard', selected_user.id)
+		db.session.add(billing16)
+		db.session.commit()
+		
+		billing17 = b('Creditcard', selected_user.id)
+		db.session.add(billing17)
+		db.session.commit()
+		
+		billing18 = b('Creditcard', selected_user.id)
+		db.session.add(billing18)
+		db.session.commit()
+		
+		billing19 = b('Creditcard', selected_user.id)
+		db.session.add(billing19)
+		db.session.commit()
+		
+		billing20 = b('Creditcard', selected_user.id)
+		db.session.add(billing20)
+		db.session.commit()
+		
 		cc1 = cc(selected_user.name, addr1.id, billing1.id, 4339565245438765, 208, time)
 		db.session.add(cc1)
+		db.session.commit()
+		
+		gc2 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		db.session.add(gc2)
+		db.session.commit()
+		
+		gc3 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		db.session.add(gc3)
+		db.session.commit()
+		
+		gc4 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		db.session.add(gc4)
+		db.session.commit()
+		
+		gc5 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		db.session.add(gc5)
+		db.session.commit()
+		
+		gc6 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		db.session.add(gc6)
+		db.session.commit()
+		
+		gc7 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		db.session.add(gc7)
+		db.session.commit()
+		
+		gc8 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		db.session.add(gc8)
+		db.session.commit()
+		
+		gc9 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		db.session.add(gc9)
+		db.session.commit()
+		
+		gc10 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		db.session.add(gc10)
+		db.session.commit()
+		
+		gc11 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		db.session.add(gc11)
+		db.session.commit()
+		
+		gc12 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		db.session.add(gc12)
+		db.session.commit()
+		
+		gc13 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		db.session.add(gc13)
+		db.session.commit()
+		
+		gc14 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		db.session.add(gc14)
+		db.session.commit()
+		
+		gc15 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		db.session.add(gc15)
+		db.session.commit()
+		
+		gc16 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		db.session.add(gc16)
+		db.session.commit()
+		
+		gc17 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		db.session.add(gc17)
+		db.session.commit()
+		
+		gc18 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		db.session.add(gc18)
+		db.session.commit()
+		
+		gc19 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		db.session.add(gc19)
+		db.session.commit()
+		
+		gc20 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		db.session.add(gc20)
+		db.session.commit()
+		
+		gc21 = gc(billing2.id, random.randrange(100000000000000000000000,999999999999999999999999), random.randrange(1000, 9999))
+		db.session.add(gc21)
 		db.session.commit()
 		
 		# --------------------------------------------------------------------------------
@@ -156,12 +337,96 @@ class UserLoader():
 		db.session.add(addr1)
 		db.session.commit()
 		
+		addr2 = ua(selected_user.id, selected_user.name, '2934 Coventry Road', '', 'Columbus', 'OH', '43212', 'United States')
+		db.session.add(addr2)
+		db.session.commit()
+		
+		addr3 = ua(selected_user.id, selected_user.name, '4234 West Devon Road', '', 'Columbus', 'OH', '43212', 'United States')
+		db.session.add(addr3)
+		db.session.commit()
+		
+		addr4 = ua(selected_user.id, selected_user.name, '383 Ashdowne Road', '', 'Columbus', 'OH', '43212', 'United States')
+		db.session.add(addr4)
+		db.session.commit()
+		
+		addr5 = ua(selected_user.id, selected_user.name, '2383 Arlington Avenue', '', 'Columbus', 'OH', '43212', 'United States')
+		db.session.add(addr5)
+		db.session.commit()
+		
+		addr6 = ua(selected_user.id, selected_user.name, '1283 Club Road', '', 'Columbus', 'OH', '42122', 'United States')
+		db.session.add(addr6)
+		db.session.commit()
+		
+		addr7 = ua(selected_user.id, selected_user.name, '1282 Cardiff Road', '', 'Columbus', 'OH', '43211', 'United States')
+		db.session.add(addr7)
+		db.session.commit()
+		
+		addr8 = ua(selected_user.id, selected_user.name, '2398 Lane Avenue', '', 'Columbus', 'OH', '43222', 'United States')
+		db.session.add(addr8)
+		db.session.commit()
+		
 		billing1 = b('Creditcard', selected_user.id)
 		db.session.add(billing1)
 		db.session.commit()
 		
+		billing2 = b('Creditcard', selected_user.id)
+		db.session.add(billing2)
+		db.session.commit()
+		
+		billing3 = b('Creditcard', selected_user.id)
+		db.session.add(billing3)
+		db.session.commit()
+		
+		billing4 = b('Creditcard', selected_user.id)
+		db.session.add(billing4)
+		db.session.commit()
+		
+		billing5 = b('Creditcard', selected_user.id)
+		db.session.add(billing5)
+		db.session.commit()
+		
+		billing6 = b('Creditcard', selected_user.id)
+		db.session.add(billing6)
+		db.session.commit()
+		
+		billing7 = b('Creditcard', selected_user.id)
+		db.session.add(billing7)
+		db.session.commit()
+		
+		billing8 = b('Creditcard', selected_user.id)
+		db.session.add(billing8)
+		db.session.commit()
+		
 		cc1 = cc(selected_user.name, addr1.id, billing1.id, 4321565245448596, 903, time)
 		db.session.add(cc1)
+		db.session.commit()
+		
+		cc2 = cc(selected_user.name, addr2.id, billing1.id, 4321565245448596, 903, time)
+		db.session.add(cc2)
+		db.session.commit()
+		
+		cc3 = cc(selected_user.name, addr3.id, billing1.id, 4321565245448596, 903, time)
+		db.session.add(cc3)
+		db.session.commit()
+		
+		cc4 = cc(selected_user.name, addr4.id, billing1.id, 4321565245448596, 903, time)
+		db.session.add(cc4)
+		db.session.commit()
+		
+		cc5 = cc(selected_user.name, addr5.id, billing1.id, 4321565245448596, 903, time)
+		db.session.add(cc5)
+		db.session.commit()
+		
+		cc6 = cc(selected_user.name, addr6.id, billing1.id, 4321565245448596, 903, time)
+		db.session.add(cc6)
+		db.session.commit()
+		
+		cc7 = cc(selected_user.name, addr7.id, billing1.id, 4321565245448596, 903, time)
+		db.session.add(cc7)
+		db.session.commit()
+		
+		cc8 = cc(selected_user.name, addr8.id, billing1.id, 4321565245448596, 903, time)
+		db.session.add(cc8)
 		db.session.commit()
 		
 		# --------------------------------------------------------------------------------
@@ -174,10 +439,123 @@ class UserLoader():
 		db.session.add(billing1)
 		db.session.commit()
 		
+		billing2 = b('Giftcard', selected_user.id)
+		db.session.add(billing2)
+		db.session.commit()
+		
+		billing3 = b('Giftcard', selected_user.id)
+		db.session.add(billing3)
+		db.session.commit()
+		
+		billing4 = b('Giftcard', selected_user.id)
+		db.session.add(billing4)
+		db.session.commit()
+		
+		billing5 = b('Giftcard', selected_user.id)
+		db.session.add(billing5)
+		db.session.commit()
+		
+		billing6 = b('Giftcard', selected_user.id)
+		db.session.add(billing6)
+		db.session.commit()
+		
 		gc1 = gc(billing1.id, 987629374321565245448596, 2222)
+		db.session.add(gc1)
+		db.session.commit()
+		
+		gc2 = gc(billing2.id, 987629374321565245484756, 2348)
+		db.session.add(gc2)
+		db.session.commit()
+		
+		gc3 = gc(billing3.id, 987629374534523423423423, 9383)
+		db.session.add(gc3)
+		db.session.commit()
+		
+		gc4 = gc(billing4.id, 987629374321565234234354, 7821)
+		db.session.add(gc4)
+		db.session.commit()
+		
+		gc5 = gc(billing5.id, 987629374321565249273546, 2917)
+		db.session.add(gc5)
+		db.session.commit()
+		
+		gc6 = gc(billing6.id, 987629374321565245863524, 8734)
+		db.session.add(gc6)
+		db.session.commit()
+		
+		# --------------------------------------------------------------------------------
+		selected_user = ''
+		for user in u.query.all():
+			if user.email=='khelt@gmail.com':
+				selected_user = user
+				
+		addr1 = ua(selected_user.id, selected_user.name, '212 Farm Lane', '', 'Palo Alto', 'CA', '97802', 'United States')
+		db.session.add(addr1)
+		db.session.commit()
+		
+		addr2 = ua(selected_user.id, selected_user.name, '213 Farm Lane', '', 'Palo Alto', 'CA', '97802', 'United States')
+		db.session.add(addr2)
+		db.session.commit()
+		
+		addr3 = ua(selected_user.id, selected_user.name, '214 Farm Lane', '', 'Palo Alto', 'CA', '97802', 'United States')
+		db.session.add(addr3)
+		db.session.commit()
+		
+		billing1 = b('Creditcard', selected_user.id)
+		db.session.add(billing1)
+		db.session.commit()
+		
+		billing2 = b('Creditcard', selected_user.id)
+		db.session.add(billing2)
+		db.session.commit()
+		
+		billing3 = b('Creditcard', selected_user.id)
+		db.session.add(billing3)
+		db.session.commit()
+		
+		billing4 = b('Creditcard', selected_user.id)
+		db.session.add(billing4)
+		db.session.commit()
+		
+		billing5 = b('Creditcard', selected_user.id)
+		db.session.add(billing5)
+		db.session.commit()
+		
+		billing6 = b('Creditcard', selected_user.id)
+		db.session.add(billing6)
+		db.session.commit()
+		
+		billing7 = b('Giftcard', selected_user.id)
+		db.session.add(billing7)
+		db.session.commit()
+		
+		cc1 = cc(selected_user.name, addr1.id, billing1.id, 4321565245448596, 903, time)
 		db.session.add(cc1)
 		db.session.commit()
 		
+		cc2 = cc(selected_user.name, addr2.id, billing2.id, 4321565245448596, 903, time)
+		db.session.add(cc2)
+		db.session.commit()
+		
+		cc3 = cc(selected_user.name, addr3.id, billing3.id, 4321565245448596, 903, time)
+		db.session.add(cc3)
+		db.session.commit()
+		
+		cc1 = cc(selected_user.name, addr1.id, billing4.id, 4321565245645643, 234, time)
+		db.session.add(cc1)
+		db.session.commit()
+		
+		cc2 = cc(selected_user.name, addr2.id, billing5.id, 4321565245645643, 234, time)
+		db.session.add(cc2)
+		db.session.commit()
+		
+		cc3 = cc(selected_user.name, addr3.id, billing6.id, 4321565245645643, 234, time)
+		db.session.add(cc3)
+		db.session.commit()
+		
+		gc6 = gc(billing7.id, 847586974321565234234354, 5687)
+		db.session.add(gc6)
+		db.session.commit()
 		
 
 if __name__=='__main__':
