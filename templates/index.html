@@ -2,9 +2,18 @@
 
 {% block content %}
 <div class="section">
-  <h2>Welcome!</h2>
-  <div class="content">
-    You are very special to us.
+  <h2>Search</h2>
+  <div id="search">
+    <form method="GET" action="">
+      <div class="searchbar">
+        {{ form.search }}
+      </div>
+      <input type="submit" value="Search">
+    </form>
   </div>
+  {% if results %}
+    {% for id, title, author, publisher, price in results %}
+    {% endfor %}
+  {% endif %}
 </div>
 {% endblock %}

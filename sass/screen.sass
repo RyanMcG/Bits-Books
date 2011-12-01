@@ -25,32 +25,25 @@ body.bp
     margin: .5em 0 .15em
 
   ul#navigation
-    $nav_color: darken($blueprint-border-color, 60%)
-    $navrad: .4em
-    padding: .3em
-    border: $navrad solid lighten($nav_color, 20%)
-    background-color: $nav_color
-    list-style-type: none
-    +box-shadow(0 0 4em lighten($nav_color, 30%), inset 0 0 1em darken($nav_color, 20%))
-    //+box-shadow(0 0 .6em $nav_color, 20%)
-    //+border-radius(6px)
-    //+background-image(linear-gradient(center top, #f0f0f0 0%, #e3e3e3 100%))
-    +border-radius($navrad * 2)
-    +clearfix
-    font-family: $blueprint-fixed-font-family
-    font-weight: bold
-
     margin: 0
+    padding: 0
+    font-family: $header-font
+    font-weight: bold
+    color: $mycolor
     li
       margin: 0 .4em
       +float-left
       &.last
         +last
+      &:before
+        content: '[ '
+      &:after
+        content: ' ]'
       a
         text-decoration: none
-        color: lighten($button_text_color, 40%)
+        color: lighten($button_text_color, 20%)
         &:hover
-          color: #f9f9f9
+          text-decoration: underline
 
 #container ul.flashes
   margin: 0
@@ -90,3 +83,27 @@ input[type="submit"]
   +pretty-button
   +float-right
   margin: .1em 0
+
+#search 
+  +column(12, true)
+  input
+    font-size: 1.15em
+    line-height: 1em
+    &[type="text"]
+      margin: 0
+      $nav_color: darken($blueprint-border-color, 60%)
+      $navrad: .4em
+      padding: .6em .8em
+      color: #f9f9f9
+      border: $navrad solid lighten($nav_color, 20%)
+      background-color: $nav_color
+      list-style-type: none
+      +box-shadow(0 0 4em lighten($nav_color, 30%), inset 0 0 1em darken($nav_color, 20%))
+      +border-radius($navrad * 2)
+      +clearfix
+      font-family: $blueprint-fixed-font-family
+      font-weight: bold
+    &[type="submit"]
+      margin-top: .4em
+    &:focus
+      outline: none

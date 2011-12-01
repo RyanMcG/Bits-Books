@@ -1,8 +1,8 @@
 import os
 
 from bitslib.database import init_app
-from bitslib.forms import LoginForm, RegistrationForm
-from bitslib.models import User
+from bitslib.forms import LoginForm, RegistrationForm, SearchForm
+from bitslib.models import User, Book, Author
 from bitslib.user_manager import login_manager
 from bitslib.utils import debug_str, str_to_digits
 from flask import (Flask, send_from_directory, render_template, redirect,
@@ -35,7 +35,16 @@ def favicon():
 @app.route('/')
 def index():
     #Show main page with search
-    return render_template("index.html")
+    form = SearchForm()
+    results = False
+    search = request.args.get("search")
+    if search:
+        searchq = "%" + search + "%"
+        books = Book.query.filter(Book.title.like(searchq))
+        authors = Book.query.filter(Author.name.like(searchq))
+        books = [books.extend(a.Books) for a in authors]
+        results = [(x.id, x.title, x.author, x.price) for x in books]
+    return render_template("index.html", form=form, results=results)
 
 
 @app.route("/logout")

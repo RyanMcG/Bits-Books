@@ -129,9 +129,9 @@ class Book(db.Model):
     Publisher = db.relationship('Publisher',
             primaryjoin='Book.publisher_id==Publisher.id')
     Authors = db.relationship('Author', secondary=Book_Author,
-            backref=db.backref('Book'))
+            backref=db.backref('books'))
     Categories = db.relationship('Category', secondary=Book_Category,
-            backref=db.backref('Book'))
+            backref=db.backref('books'))
 
 
 class Cart(db.Model):

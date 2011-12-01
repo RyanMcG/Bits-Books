@@ -15,7 +15,11 @@
     <div id='container'>
       <div id='header'>
         {%- block header %}
-        <h1>{% block headertitle %}Bits &amp; Books<span class="cursor">_</span>{% endblock %}</h1>
+        <h1>
+          <a href="{{ url_for("index") }}">
+            {% block headertitle %}Bits &amp; Books<span class="cursor">_</span>{% endblock %}
+          </a>
+        </h1>
         {% endblock -%}
         <ul id="navigation">
           {%- block navigation %}

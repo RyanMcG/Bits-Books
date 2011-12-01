@@ -31,3 +31,7 @@ class RegistrationForm(LoginForm):
         ])
     confirm = PasswordField('Repeat Password')
     admin = BooleanField('Make me an Admin')
+
+
+class SearchForm(Form):
+    search = TextField('Search', [validators.Required()])
