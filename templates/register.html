@@ -1,14 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-<form method="POST" action="">
-    {{ form.csrf }}
-    {{ form.email.label }} {{ form.email(size=32) }}
-    {{ form.username.label }} {{ form.username(size=32) }}
-    {{ form.name.label }} {{ form.name(size=32) }}
-    {{ form.phone.label }} {{ form.phone(size=32) }}
-    {{ form.password.label }} {{ form.password(size=32) }}
-    {{ form.confirm.label }} {{ form.confirm(size=32) }}
-    <input type="submit" value="Register">
-</form>
+<div class="section">
+  <h2>Register</h2>
+  <div class="content">
+    <form method="POST" action="">
+        {{ form.csrf }}
+        {{ form.email.label }} {{ form.email(size=32) }}
+        {{ form.username.label }} {{ form.username(size=32) }}
+        {{ form.name.label }} {{ form.name(size=32) }}
+        {{ form.phone.label }} {{ form.phone(size=32) }}
+        {{ form.password.label }} {{ form.password(size=32) }}
+        {{ form.confirm.label }} {{ form.confirm(size=32) }}
+        {{ form.admin.label }} {{ form.admin }}
+        <input type="submit" value="Register">
+    </form>
+  </div>
+</div>
 {% endblock %}

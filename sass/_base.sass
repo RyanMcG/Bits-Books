@@ -10,22 +10,23 @@ $blueprint-background-color: #f9f9f9
 $blueprint-border-color: #ddd 
 
 //Set some custom colors
-$mycolor: #636363
+$mycolor: #669980
 
 $link-color: lighten($mycolor, 12%) 
 $link-hover-color: darken($mycolor, 12%)
 
+//Blueprint grid stuff
+$blueprint-grid-columns: 12
+
 @import blueprint
 @import blueprint/buttons
 
-$blueprint-font-family: DejaVu Sans, Helvetica, Arial, sans-serif
+$blueprint-font-family: Helvetica, Arial, sans-serif
 $blueprint-fixed-font-family: 'Inconsolata', DejaVu Sans Mono, "andale mono", Courier, monospace
 $blueprint-font-size: 13px
+$button_text_color: darken(saturate($mycolor, 20%), 20%)
 
 @import compass/css3
-
-//Blueprint grid stuff
-$blueprint-grid-columns: 12
 
 //Uncomment the following for a liquid layout
 //@import blueprint/liquid
@@ -37,12 +38,12 @@ $header-font: "Copse", $blueprint-font-family
 @mixin pretty-button()
   +anchor-button
   +box-shadow(inset 0px 1px 0px 0px #ffffff)
-  +border-radius(6px)
-  +background-image(linear-gradient(center top, #f0f0f0 5%, #e3e3e3 100%))
+  //+border-radius(6px)
+  +background-image(linear-gradient(center top, #f0f0f0 0%, #e3e3e3 100%))
   background-color: #ededed
   border: 1px solid #dcdcdc
-  $button_text_color: desaturate($mycolor, 23%)
   color: $button_text_color
+  font-family: $blueprint-font-family
   &:hover
     +background-image(linear-gradient(center top, #e3e3e3 5%, #f0f0f0 100%))
     background-color: #dfdfdf

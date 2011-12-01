@@ -18,6 +18,13 @@ db = init_app(app, argv)
 login_manager.setup_app(app)
 
 
+@app.context_processor
+def inject_user():
+    """Tell the view whether someone is logged in or not"""
+    return {'logged_in': current_user.is_active(),
+            'is_admin': current_user.is_active() and current_user.is_admin()}
+
+
 @app.route('/favicon.ico')
 def favicon():
     """Reroute requests to the favicon to the correct location in static."""
@@ -28,7 +35,7 @@ def favicon():
 @app.route('/')
 def index():
     #Show main page with search
-    return render_template("base.html")
+    return render_template("index.html")
 
 
 @app.route("/logout")
@@ -52,8 +59,8 @@ def login():
                         User.username == form.username.data,
                         User.password == form.password.data)).first()
                     user.authenticated = True
-                    flash("Logged in successfully.", "success")
                     login_user(user, form.remember_me.data)
+                    flash("Logged in successfully.", "success")
                     return redirect(to_page or url_for("index"))
                 except:
                     flash("Invalid Username/Password", "error")

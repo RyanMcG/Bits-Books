@@ -15,14 +15,21 @@
     <div id='container'>
       <div id='header'>
         {%- block header %}
-        <h1>{% block headertitle %}Bits &amp; Books{% endblock %}</h1>
+        <h1>{% block headertitle %}Bits &amp; Books<span class="cursor">_</span>{% endblock %}</h1>
         {% endblock -%}
+        <ul id="navigation">
+          {%- block navigation %}
+          {% if logged_in %}
+            {% set nav_menu = [('logout', 'Logout')] %}
+          {% else %}
+            {% set nav_menu = [('login', 'Login'), ('register', 'Register')] %}
+          {% endif %}
+          {% for link, name in nav_menu %}
+            <li><a href="{{ url_for(link) }}">{{ name }}</a></li>
+          {% endfor %}
+          {% endblock -%}
+        </ul>
       </div>
-      <ul id="navigation">
-        {%- block navigation %}
-        <li><a href="">Register</a></li>
-        {% endblock -%}
-      </ul>
         {% block flashy %}
           {% with messages = get_flashed_messages(with_categories=True) %}
             {% if messages %}

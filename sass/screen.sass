@@ -2,6 +2,7 @@
 
 html
   background: $blueprint-background-color
+  font-size: 20px
 
 h1, h2, h3, h4, h5, h6
   font-family: $header-font
@@ -11,38 +12,56 @@ body.bp
 
 #container
   +container
+  overflow: visible
 
 #header
   +column(12, true)
   h1
-    font-size: 4em
+    font-size: 3.7em
     color: $mycolor
-    font-family: $logo_font, $header-font
-    padding: 0 .2em
+    font-family: $blueprint-fixed-font-family
     text-align: left
-    line-height: 1.2em
-    margin: .5em 0 0
+    line-height: 1em
+    margin: .5em 0 .15em
 
-ul#navigation
-  +column(12, true)
-  list-style-type: none
-  margin: 3em 0 0
-  padding: 0
-  li
-    text-align: center
+  ul#navigation
+    $nav_color: darken($blueprint-border-color, 60%)
+    $navrad: .4em
+    padding: .3em
+    border: $navrad solid lighten($nav_color, 20%)
+    background-color: $nav_color
+    list-style-type: none
+    +box-shadow(0 0 4em lighten($nav_color, 30%), inset 0 0 1em darken($nav_color, 20%))
+    //+box-shadow(0 0 .6em $nav_color, 20%)
+    //+border-radius(6px)
+    //+background-image(linear-gradient(center top, #f0f0f0 0%, #e3e3e3 100%))
+    +border-radius($navrad * 2)
+    +clearfix
+    font-family: $blueprint-fixed-font-family
+    font-weight: bold
+
     margin: 0
-    &.last
-      +last
-    a
-      +pretty-button
+    li
+      margin: 0 .4em
+      +float-left
+      &.last
+        +last
+      a
+        text-decoration: none
+        color: lighten($button_text_color, 40%)
+        &:hover
+          color: #f9f9f9
 
 #container ul.flashes
   margin: 0
   padding: 0
   +column(12, true)
   list-style-type: none
+  font-family: $header-font
 
   li
+    margin: .5em 0 0
+    padding: .4em
     +border-radius
 
 #content
@@ -52,8 +71,9 @@ ul#navigation
     h2
       margin-bottom: 0
     .content
-      background: lighten($blueprint-border-color, 20%)
-      border: 1px dashed $blueprint-border-color
+      //background: lighten($blueprint-background-color, 5%)
+      +clearfix
+      border: 4px dashed $blueprint-border-color
       margin: 0 0 $spacing
       padding: $spacing
       p
@@ -68,3 +88,5 @@ input
 
 input[type="submit"]
   +pretty-button
+  +float-right
+  margin: .1em 0
