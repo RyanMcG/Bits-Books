@@ -233,8 +233,6 @@ class Order(db.Model):
     id = db.Column(u'id', db.Integer(), primary_key=True, nullable=False)
     user_id = db.Column(u'user_id', db.Integer(), db.ForeignKey('User.id'))
     cart_id = db.Column(u'cart_id', db.Integer(), db.ForeignKey('Cart.id'))
-    subtotal = db.Column(u'subtotal', db.DECIMAL(precision=7, scale=2),
-            nullable=False)
     shipping = db.Column(u'shipping', db.DECIMAL(precision=7, scale=2),
             nullable=False)
     tax = db.Column(u'tax', db.DECIMAL(precision=7, scale=2), nullable=False)
@@ -332,9 +330,9 @@ class User(db.Model):
         self.authenticated = False
 
     def __repr__(self):
-        return "<User id: {id}, username: {usn}, name: {name}, authed: \
-            {auth}>".format(id=self.id, name=self.name, usn=self.username,
-                    auth=self.authenticated)
+        return "<User id: {id}, username: {usn}, name: {name},>".format(
+                id=self.id, name=self.name, usn=self.username,
+                auth=self.authenticated)
 
     #Methods for Flask-Login
 
@@ -349,6 +347,10 @@ class User(db.Model):
 
     def is_active(self):
         return self.is_authenticated()
+
+    def is_admin(self):
+        #print User.Admin
+        return False
 
     #db.relationship definitions
     Carts = db.relationship('Cart', primaryjoin='User.id==Cart.user_id',

@@ -123,7 +123,6 @@ CREATE TABLE `Order` (
   id INT(13) NOT NULL AUTO_INCREMENT,
   user_id INT(13),
   cart_id INT(13),
-  subtotal DECIMAL(7,2) NOT NULL,
   shipping DECIMAL(7,2) NOT NULL,
   tax DECIMAL(7,2) NOT NULL,
   status VARCHAR(10) NOT NULL,
