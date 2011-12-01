@@ -1,4 +1,4 @@
-from bitslib.models import User as u, Creditcard as cc, Giftcard as gc, Billing as b, UserAddress as ua, Admin as a, Cart as c, CartItem as ci
+from bitslib.models import User as u, Creditcard as cc, Giftcard as gc, Billing as b, UserAddress as ua, Admin as a, Cart as c, CartItem as ci, Order as o, OrderItem as oi, Book, OrderPayment as op
 from web import db
 from datetime import datetime
 import random
@@ -565,19 +565,59 @@ class UserLoader():
 	def loadCarts(self):
 		for user in u.query.all():
 			new_cart = c(user.id, 'Open')
-			
+			db.session.add(new_cart)
+			db.session.commit()
 			book_id = 0
 			for book in b.query.all():
 				prev = book_id
 				book_id = book.id
 				if random.randrange(0,2)==0:
 					book_id = prev
-
-			new_item = ci(new_cart.id, book_id, random.randrange(1, 5), 'OK')
 			
-			db.session.add(new_cart)
+			new_item = ci(new_cart.id, book_id, random.randrange(1, 5), 'OK')
 			db.session.add(new_item)
+			#db.session.add(new_cart)
+			#db.session.add(new_item)
 			db.session.commit()
+
+	def loadOrders(self):
+		for cart in c.query.all():
+			new_order = o(cart.user_id, cart.id, 0, 0, 'Shipped')
+			db.session.add(new_order)
+			db.session.commit()
+			for cart_item in ci.query.all():
+				if cart_item.cart_id==cart.id:
+					cost = 0
+					for bo in Book.query.all():
+						print '***', bo.id, cart_item.book_id, bo.price
+						if bo.id==cart_item.book_id:
+							cost = float(bo.price)
+
+					new_order_item = oi(new_order.id, cart_item.book_id, cart_item.quantity, cost, float(cost) + 1, 'OK')
+					new_order.shipping = 5
+					db.session.add(new_order)
+					db.session.commit()
+					new_order.tax = .07 * float(new_order_item.price) * new_order_item.quantity
+					db.session.add(new_order_item)
+					db.session.commit()
+
+		
+					billing_id = None
+					for billing in b.query.all():
+						if billing.user_id == cart.user_id:
+							billing_id = billing.id
+
+					subtotal = float(new_order_item.price) * new_order_item.quantity + float(new_order.tax) + float(new_order.shipping)
+					new_order_payment = op(new_order_item.id, billing_id, subtotal)
+					db.session.add(new_order_payment)
+					db.session.commit()
+			db.session.add(new_order)
+	
+			
+
+			db.session.commit()
+
+
 		
 
 if __name__=='__main__':
@@ -586,3 +626,4 @@ if __name__=='__main__':
 	loader.loadAdmin()
 	loader.loadBilling()
 	loader.loadCarts()
+	loader.loadOrders()

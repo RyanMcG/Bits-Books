@@ -330,6 +330,17 @@ class Order(db.Model):
     date_created = db.Column(u'date_created', db.DateTime(), nullable=False)
     date_modified = db.Column(u'date_modified', db.DateTime(), nullable=False)
 
+    def __init__(self, user_id, cart_id, shipping, tax, status):
+        self.user_id = user_id
+        self.cart_id = cart_id
+        self.shipping = shipping
+        self.tax = tax
+        self.subtotal = 0
+        self.status = status
+        current_time = now().strftime("%Y-%m-%d %H:%M")
+        self.date_created = current_time
+        self.date_modified = current_time
+
     #db.relationship definitions
     User = db.relationship('User', primaryjoin='Order.user_id==User.id')
     Cart = db.relationship('Cart', primaryjoin='Order.cart_id==Cart.id')
@@ -348,6 +359,17 @@ class OrderItem(db.Model):
     date_created = db.Column(u'date_created', db.DateTime(), nullable=False)
     date_modified = db.Column(u'date_modified', db.DateTime(), nullable=False)
 
+    def __init__(self, order_id, book_id, quantity, cost, price, status):
+        self.order_id = order_id
+        self.book_id = book_id
+        self.quantity = quantity
+        self.cost = cost
+        self.price = price
+        self.status = status
+        current_time = now().strftime("%Y-%m-%d %H:%M")
+        self.date_created = current_time
+        self.date_modified = current_time
+
     #db.relationship definitions
     Order = db.relationship('Order',
             primaryjoin='OrderItem.order_id==Order.id')
@@ -364,6 +386,15 @@ class OrderPayment(db.Model):
     price = db.Column(u'price', db.Float(precision=7, scale=2), nullable=False)
     date_created = db.Column(u'date_created', db.DateTime(), nullable=False)
     date_modified = db.Column(u'date_modified', db.DateTime(), nullable=False)
+
+    def __init__(self, order_id, billing_id, price):
+        self.order_id = order_id
+        self.billing_id = billing_id
+        self.price = price
+        current_time = now().strftime("%Y-%m-%d %H:%M")
+        self.date_created = current_time
+        self.date_modified = current_time
+
 
     #db.relationship definitions
     Order = db.relationship('Order',
