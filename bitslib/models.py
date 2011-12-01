@@ -39,6 +39,13 @@ class Admin(db.Model):
     level = db.Column(u'level', db.String(length=8), nullable=False)
     user_id = db.Column(u'user_id', db.Integer(), db.ForeignKey('User.id'))
 
+    def __init__(self, level, user_id):
+        self.level = level
+        self.user_id = user_id
+        current_time = now().strftime("%Y-%m-%d %H:%M")
+        self.date_created = current_time
+        self.date_modified = current_time
+
     #db.relationship definitions
     User = db.relationship('User', primaryjoin='Admin.user_id==User.id',
             backref=db.backref('User', lazy='joined'))
@@ -56,6 +63,13 @@ class Author(db.Model):
     id = db.Column(u'id', db.Integer(), primary_key=True, nullable=False)
     name = db.Column(u'name', db.String(length=32), nullable=False)
 
+    def __init__(self, name, b_date):
+        current_time = now().strftime("%Y-%m-%d %H:%M")
+        self.date_created = current_time
+        self.date_modified = current_time
+        self.name = name
+        self.birth_date = b_date
+
     #db.relationship definitions
     Books = db.relationship('Book', secondary=Book_Author)
 
@@ -72,6 +86,13 @@ class Billing(db.Model):
     type = db.Column(u'type', db.String(length=12))
     user_id = db.Column(u'user_id', db.Integer(), db.ForeignKey('User.id'))
 
+    def __init__(self, type, user_id):
+        self.type = type
+        self.user_id = user_id
+        current_time = now().strftime("%Y-%m-%d %H:%M")
+        self.date_created = current_time
+        self.date_modified = current_time
+
     #db.relationship definitions
     User = db.relationship('User', primaryjoin='Billing.user_id==User.id')
 
@@ -79,7 +100,7 @@ class Billing(db.Model):
 class Book(db.Model):
     __tablename__ = 'Book'
 
-    __table_args__ = {}
+    __table_args__ = {}  
 
     #column definitions
     date_created = db.Column(u'date_created', db.DateTime(), nullable=False)
@@ -91,6 +112,16 @@ class Book(db.Model):
     publisher_id = db.Column(u'publisher_id', db.Integer(),
             db.ForeignKey('Publisher.id'))
     title = db.Column(u'title', db.String(length=64), nullable=False)
+
+    def __init__(self, isbn, title, price, pub_id):
+        current_time = now().strftime("%Y-%m-%d %H:%M")
+        self.date_created = current_time
+        self.date_modified = current_time
+        self.isbn = isbn
+        self.title = title
+        self.price = price
+        self.publisher_id = pub_id
+        
 
     #db.relationship definitions
     Publisher = db.relationship('Publisher',
@@ -113,6 +144,13 @@ class Cart(db.Model):
     user_id = db.Column(u'user_id', db.Integer(), db.ForeignKey('User.id'))
     status = db.Column(u'status', db.String(length=10), nullable=False)
 
+    def __init__(self, user_id, status):
+        self.user_id = user_id
+        self.status = status
+        current_time = now().strftime("%Y-%m-%d %H:%M")
+        self.date_created = current_time
+        self.date_modified = current_time
+
 
 class CartItem(db.Model):
     __tablename__ = 'CartItem'
@@ -126,6 +164,15 @@ class CartItem(db.Model):
     status = db.Column(u'status', db.String(length=10), nullable=False)
     date_created = db.Column(u'date_created', db.DateTime(), nullable=False)
     date_modified = db.Column(u'date_modified', db.DateTime(), nullable=False)
+
+    def __init__(self, cart_id, book_id, quantity, status):
+        self.cart_id = cart_id
+        self.book_id = book_id
+        self.quantity = quantity
+        self.status = status
+        current_time = now().strftime("%Y-%m-%d %H:%M")
+        self.date_created = current_time
+        self.date_modified = current_time
 
     #db.relationship definitions
     Book = db.relationship('Book', primaryjoin='CartItem.book_id==Book.id')
@@ -143,6 +190,12 @@ class Category(db.Model):
     id = db.Column(u'id', db.Integer(), primary_key=True, nullable=False)
     name = db.Column(u'name', db.String(length=32), nullable=False,
             unique=True)
+
+    def __init__(self, name):
+        self.name = name
+        current_time = now().strftime("%Y-%m-%d %H:%M")
+        self.date_created = current_time
+        self.date_modified = current_time
 
     #db.relationship definitions
     Books = db.relationship('Book', secondary=Book_Category)
@@ -162,6 +215,17 @@ class Creditcard(db.Model):
     exp_date = db.Column(u'exp_date', db.Date(), nullable=False)
     date_created = db.Column(u'date_created', db.DateTime(), nullable=False)
     date_modified = db.Column(u'date_modified', db.DateTime(), nullable=False)
+
+    def __init__(self, name, address_id, billing_id, cc_number, sec_number, exp_date):
+        self.address_id = address_id
+        self.billing_id = billing_id
+        self.name = name
+        self.cc_number = cc_number
+        self.sec_number = sec_number
+        self.exp_date = exp_date
+        current_time = now().strftime("%Y-%m-%d %H:%M")
+        self.date_created = current_time
+        self.date_modified = current_time
 
     #db.relationship definitions
     UserAddress = db.relationship('UserAddress',
@@ -185,6 +249,14 @@ class Giftcard(db.Model):
             unique=True)
     pin = db.Column(u'pin', db.Integer(), nullable=False)
 
+    def __init__(self, billing_id, number, pin):
+        self.billing_id = billing_id
+        self.number = number
+        self.pin = pin
+        current_time = now().strftime("%Y-%m-%d %H:%M")
+        self.date_created = current_time
+        self.date_modified = current_time
+
     #db.relationship definitions
     Billing = db.relationship('Billing',
             primaryjoin='Giftcard.billing_id==Billing.id')
@@ -202,6 +274,14 @@ class Inventory(db.Model):
     id = db.Column(u'id', db.Integer(), primary_key=True, nullable=False)
     quantity = db.Column(u'quantity', db.Integer(), nullable=False)
     status = db.Column(u'status', db.String(length=10), nullable=False)
+
+    def __init__(self, book_id, quantity, status):
+        self.book_id = book_id
+        self.quantity = quantity
+        self.status = status
+        current_time = now().strftime("%Y-%m-%d %H:%M")
+        self.date_created = current_time
+        self.date_modified = current_time
 
     #db.relationship definitions
     Book = db.relationship('Book', primaryjoin='Inventory.book_id==Book.id')
@@ -222,6 +302,15 @@ class InventoryOrder(db.Model):
             db.ForeignKey('Inventory.id'))
     orig_quantity = db.Column(u'orig_quantity', db.Integer(), nullable=False)
 
+    def __init__(self, cost, cur_quantity, inv_id, orig_quant):
+        self.cost = cost
+        self.cur_quantity = cur_quantity
+        self.inventory_id = inv_id
+        self.orig_quantity = orig_quant
+        current_time = now().strftime("%Y-%m-%d %H:%M")
+        self.date_created = current_time
+        self.date_modified = current_time
+
     #db.relationship definitions
     Inventory = db.relationship('Inventory',
             primaryjoin='InventoryOrder.inventory_id==Inventory.id')
@@ -239,6 +328,17 @@ class Order(db.Model):
     status = db.Column(u'status', db.String(length=10), nullable=False)
     date_created = db.Column(u'date_created', db.DateTime(), nullable=False)
     date_modified = db.Column(u'date_modified', db.DateTime(), nullable=False)
+
+    def __init__(self, user_id, cart_id, shipping, tax, status):
+        self.user_id = user_id
+        self.cart_id = cart_id
+        self.shipping = shipping
+        self.tax = tax
+        self.subtotal = 0
+        self.status = status
+        current_time = now().strftime("%Y-%m-%d %H:%M")
+        self.date_created = current_time
+        self.date_modified = current_time
 
     #db.relationship definitions
     User = db.relationship('User', primaryjoin='Order.user_id==User.id')
@@ -259,6 +359,17 @@ class OrderItem(db.Model):
     date_created = db.Column(u'date_created', db.DateTime(), nullable=False)
     date_modified = db.Column(u'date_modified', db.DateTime(), nullable=False)
 
+    def __init__(self, order_id, book_id, quantity, cost, price, status):
+        self.order_id = order_id
+        self.book_id = book_id
+        self.quantity = quantity
+        self.cost = cost
+        self.price = price
+        self.status = status
+        current_time = now().strftime("%Y-%m-%d %H:%M")
+        self.date_created = current_time
+        self.date_modified = current_time
+
     #db.relationship definitions
     Order = db.relationship('Order',
             primaryjoin='OrderItem.order_id==Order.id')
@@ -276,6 +387,15 @@ class OrderPayment(db.Model):
             nullable=False)
     date_created = db.Column(u'date_created', db.DateTime(), nullable=False)
     date_modified = db.Column(u'date_modified', db.DateTime(), nullable=False)
+
+    def __init__(self, order_id, billing_id, price):
+        self.order_id = order_id
+        self.billing_id = billing_id
+        self.price = price
+        current_time = now().strftime("%Y-%m-%d %H:%M")
+        self.date_created = current_time
+        self.date_modified = current_time
+
 
     #db.relationship definitions
     Order = db.relationship('Order',
@@ -298,7 +418,16 @@ class Publisher(db.Model):
     id = db.Column(u'id', db.Integer(), primary_key=True, nullable=False)
     name = db.Column(u'name', db.String(length=32), nullable=False)
     state = db.Column(u'state', db.String(length=20))
-
+    
+    def __init__(self, name, city, state, country, est_date):
+        self.name = name
+        self.city = city
+        self.state = state
+        self.country = country
+        self.established_date = est_date
+	current_time = now().strftime("%Y-%m-%d %H:%M")
+        self.date_created = current_time
+        self.date_modified = current_time 
 
 class User(db.Model):
     __tablename__ = 'User'
@@ -385,6 +514,7 @@ class UserAddress(db.Model):
         self.state = state
         self.zip = zip
         self.country = country
+        self.status = 'OK'
         current_time = now().strftime("%Y-%m-%d %H:%M")
         self.date_created = current_time
         self.date_modified = current_time
