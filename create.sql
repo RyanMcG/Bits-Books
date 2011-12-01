@@ -81,7 +81,8 @@ CREATE TABLE Inventory (
   status VARCHAR(10) NOT NULL,
   date_created DATETIME NOT NULL,
   date_modified DATETIME NOT NULL,
-  PRIMARY KEY(id)
+  PRIMARY KEY(id),
+  UNIQUE (book_id)
 );
 
 -- InventoryOrder
@@ -128,7 +129,8 @@ CREATE TABLE `Order` (
   status VARCHAR(10) NOT NULL,
   date_created DATETIME NOT NULL,
   date_modified DATETIME NOT NULL,
-  PRIMARY KEY(id)
+  PRIMARY KEY(id),
+  UNIQUE (cart_id)
 );
 
 -- OrderItem
@@ -178,7 +180,8 @@ CREATE TABLE `Admin` (
   `level` VARCHAR(8) NOT NULL,
   date_created DATETIME NOT NULL,
   date_modified DATETIME NOT NULL,
-  PRIMARY KEY(id)
+  PRIMARY KEY(id),
+  UNIQUE (user_id)
 );
 
 -- UserAddress
@@ -219,7 +222,8 @@ CREATE TABLE Creditcard (
   exp_date DATE NOT NULL,
   date_created DATETIME NOT NULL,
   date_modified DATETIME NOT NULL,
-  PRIMARY KEY(id)
+  PRIMARY KEY(id),
+  UNIQUE (billing_id)
 );
 
 -- Giftcard
@@ -231,5 +235,6 @@ CREATE TABLE Giftcard (
   date_created DATETIME NOT NULL,
   date_modified DATETIME NOT NULL,
   PRIMARY KEY(id),
-  UNIQUE (`number`)
+  UNIQUE (`number`),
+  UNIQUE (billing_id)
 );

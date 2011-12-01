@@ -122,6 +122,9 @@ class Book(db.Model):
         self.price = price
         self.publisher_id = pub_id
 
+    def __repr__(self):
+        return "<Book id: {0}, title: {1}>".format(self.id, self.title)
+
     #db.relationship definitions
     Publisher = db.relationship('Publisher',
             primaryjoin='Book.publisher_id==Publisher.id')
