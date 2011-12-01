@@ -75,7 +75,7 @@ python environment then you can start a python shell after you have activated
 your virtual environment with a simple call to `python`. Now, just import
 `play.py` to use application models to access the database:
 
-    >>> import play
+    >>> from play import * # This imports all models and the db instance
     >>> # To get all the users in the database you can do something like this:
     >>> User.query.all()
 

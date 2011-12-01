@@ -6,9 +6,15 @@ application:
 
 # To change the default database you must copy this file to database.yml and
 # change the hostspec to connect to your database.
-#   hostspec: <protocol>://<user>:<password>@<host>/<database name>
+#   hostspec: <protocol>://<user>:<password>@<host>[:port]/<database name>
+#
+#   NOTE: sqlalchemy also considers what adapater is being used. If you can't
+#         get pymysql to work on your system you could try installing
+#         MySQL-Python with pip and changing the protpocal:
+#
+#               mysql+pymysql -> mysql+mysqldb
 databases:
   production:
     hostspec: favsql://exuser:expass@example.exampleaws.com/somedbname
   development:
-    hostspec: mysql://bitbook:amazon@localhost/bitbook
+    hostspec: mysql+pymysql://bitbook:amazon@localhost/bitbook
