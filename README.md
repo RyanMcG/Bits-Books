@@ -11,7 +11,6 @@ Flask front-end for CSE 670 Database project.
 
 * Python
     * Flask
-        * Gravatar
 * Compass and SASS
     * blueprint/semantic
 * HAML
@@ -110,4 +109,4 @@ these are covered in the Heroku instructions referenced above).
  
     Or if you have foreman installed (`gem install foreman`):
 
-        foreman start
+        foreman start web
