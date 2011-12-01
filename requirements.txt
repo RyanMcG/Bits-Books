@@ -1,14 +1,9 @@
 Flask==0.8
-Flask-Admin==0.2.2
-Flask-Coffee==0.2
-Flask-Compass==0.2
-Flask-Gravatar==0.2.2
 Flask-Login==0.1
 Flask-SQLAlchemy==0.15
-Flask-Silk==0.1.1
 Flask-WTF==0.5.2
 Jinja2==2.6
-MySQL-python==1.2.3
+PyMySQL==0.5
 PyYAML==3.10
 SQLAlchemy==0.7.3
 WTForms==0.6.3
