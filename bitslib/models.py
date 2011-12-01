@@ -3,7 +3,7 @@
 
 from datetime import datetime
 from bitslib.database import db
-from bitslib.utils import generate_encrypted_password
+from bitslib.utils import generate_encrypted_password, str_to_digits
 
 #Alias a function
 now = datetime.now
@@ -455,7 +455,7 @@ class User(db.Model):
         self.username = username
         self.email = email
         self.password = generate_encrypted_password(password)
-        self.phone = phone
+        self.phone = str_to_digits(phone)
         current_time = now().strftime("%Y-%m-%d %H:%M")
         self.date_created = current_time
         self.date_modified = current_time
