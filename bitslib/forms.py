@@ -30,3 +30,4 @@ class RegistrationForm(LoginForm):
         validators.EqualTo('confirm', message='Passwords must match')
         ])
     confirm = PasswordField('Repeat Password')
+    admin = BooleanField('Make me an Admin')
