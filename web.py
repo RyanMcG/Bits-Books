@@ -40,10 +40,12 @@ def index():
     search = request.args.get("search")
     if search:
         searchq = "%" + search + "%"
-        books = Book.query.filter(Book.title.like(searchq))
-        authors = Book.query.filter(Author.name.like(searchq))
-        books = [books.extend(a.Books) for a in authors]
-        results = [(x.id, x.title, x.author, x.price) for x in books]
+        books = Book.query.filter(Book.title.like(searchq)).all()
+        authors = Author.query.filter(Author.name.like(searchq)).all()
+        for a in authors:
+            books.extend(a.Books)
+        print books
+        results = [(x.isbn, x.title, x.price) for x in books]
     return render_template("index.html", form=form, results=results)
 
 

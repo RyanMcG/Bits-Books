@@ -15,7 +15,7 @@ body.bp
   overflow: visible
 
 #header
-  +column(12, true)
+  +column(18, true)
   h1
     font-size: 3.7em
     color: $mycolor
@@ -23,6 +23,11 @@ body.bp
     text-align: left
     line-height: 1em
     margin: .5em 0 .15em
+    a
+      text-decoration: none
+
+      &:hover
+        color: darken($mycolor, 10%)
 
   ul#navigation
     margin: 0
@@ -48,7 +53,7 @@ body.bp
 #container ul.flashes
   margin: 0
   padding: 0
-  +column(12, true)
+  +column(18, true)
   list-style-type: none
   font-family: $header-font
 
@@ -58,7 +63,7 @@ body.bp
     +border-radius
 
 #content
-  +column(12, true)
+  +column(18, true)
   .section
     $spacing: 1em
     h2
@@ -84,15 +89,21 @@ input[type="submit"]
   +float-right
   margin: .1em 0
 
-#search 
-  +column(12, true)
+.main-search 
+  +column(18, true)
+
+  .searchbar
+    position: relative
+    text-align: center
   input
-    font-size: 1.15em
+    font-size: 1.6em
     line-height: 1em
-    &[type="text"]
+    &#search
+      display: inline
+      width: 85%
       margin: 0
       $nav_color: darken($blueprint-border-color, 60%)
-      $navrad: .4em
+      $navrad: .2em
       padding: .6em .8em
       color: #f9f9f9
       border: $navrad solid lighten($nav_color, 20%)
@@ -100,10 +111,9 @@ input[type="submit"]
       list-style-type: none
       +box-shadow(0 0 4em lighten($nav_color, 30%), inset 0 0 1em darken($nav_color, 20%))
       +border-radius($navrad * 2)
-      +clearfix
       font-family: $blueprint-fixed-font-family
       font-weight: bold
     &[type="submit"]
-      margin-top: .4em
+      margin: .4em 2em 0 0
     &:focus
       outline: none

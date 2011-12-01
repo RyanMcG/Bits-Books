@@ -3,7 +3,7 @@
 {% block content %}
 <div class="section">
   <h2>Search</h2>
-  <div id="search">
+  <div class="main-search">
     <form method="GET" action="">
       <div class="searchbar">
         {{ form.search }}
@@ -12,7 +12,8 @@
     </form>
   </div>
   {% if results %}
-    {% for id, title, author, publisher, price in results %}
+    {% for isbn, title, price in results %}
+    <li>ISBN: {{ isbn }}, Title: {{ title }}, Price: ${{ price }}</li>
     {% endfor %}
   {% endif %}
 </div>
