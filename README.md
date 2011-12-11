@@ -3,7 +3,7 @@
 
 ## Description
 
-Flask front-end for CSE 670 Database project.
+Flask front-end for sample book selling ecommerce site called Bits &amp; Books.
 
 ## Development
 
@@ -14,52 +14,32 @@ Flask front-end for CSE 670 Database project.
 * Compass and SASS
     * blueprint/semantic
 * HAML
-* MySQL
+* PostgreSQL (or another RDBMS that SQLAlchemy supports)
 
 --------
 ## Setup
 
 ### Database Setup
 
-Setting up the database is a multi step process. To start off you need to have
-the necessary permissions to create a database. Any value enclosed by angle
-brackets (e.g. <variable>) is a variable and should be replaced by the
-appropriate value.
+Setting up the database is pretty simple process. Creating the tables and
+loading the data can be done from within python. You must setup a database first
+though.
 
-If you are installing this on your own system and your MySQL super user is root
-then you can use the following values:
+Create the database/schema and a user to access it. This only needs to be
+done if the database does not already exist. You might need to customize the
+`create-database.sql` file to use the correct database and username for your
+setup. Really, the given file is really just a sample.
 
-    <super user> = root
-    <bitbook user> = bitbook
-    <bitbook database> = bitbook
+    psql -U <super user> < create-database.sql
 
-If the database is preinstalled (e.g. if we are running this on stdsun), then
-the first command should not be used.
-
-1.  Create the database/schema and a user to access it. This only needs to be
-    done if the database does not already exist.
-
-        mysql -u <super user> -p < create-database.sql
-
-2.  Create the tables (The default password for the bitbook user is 'amazon'). If
-    you are not running as the bitbook user (e.g. the database has already been
-    created for you) then use whatever username has already been given.
-
-        mysql -u <bitbook user> -p <bitbook database> < create.sql
-
-3.  To use the built in data loaders you must first have the python application
-    setup properly.  This can be done by following the instructions below.
-
-4.  After you have finished loading the data you may finalize the schema.
-
-        mysql -u <bitbook user> -p <bitbook database> < finalize.sql
-
-And that's it for creating the database. Once it is up and running you can try
-installing and running the Flask application with the instructions below.
+By default the super user is `postgres`.
 
 ### Web Application (Python/Flask) Setup
 
-This package is compatible with Heroku/cedar. See the Heroku website for
+Once the database is setup we need to properly isntall the application, create
+some tables and finally load some sample data.
+
+This application is compatible with Heroku/cedar. See the Heroku website for
 [instructions on how to deploy a Python - Flask app to
 Heroku](http://devcenter.heroku.com/articles/python).
 
@@ -77,34 +57,47 @@ these are covered in the Heroku instructions referenced above).
 
 2.  Install *virtualenv*
 
-        pip install virtualenv
+        $ pip install virtualenv
 
     You might need to run the above command as sudo depending on your setup.
 
 3.  Setup and initialize *virtualenv*.
 
-        cd /path/to/this/project/
-        virtualenv --no-site-packages env
-        source env/bin/activate
+        $ cd /path/to/this/project/
+        $ virtualenv --no-site-packages env
+        $ source env/bin/activate
 
     If you are using bash you can replace the last command with: 
 
-        . env/bin/activate
+        $ . env/bin/activate
 
 4.  Install Flask and other dependencies.
 
-        pip install -r requirements.txt
+        $ pip install -r requirements.txt
 
 5.  Before we can run the application we must make it aware of the database.
     Copy the `config-example.yml` file to `config.yml` with the following
-    commands and edit it accordingly. *NOTE: Pay attention to what python to
-    mysql adapter you use. You might not get pymysql to work on your machine,
-    but something else might do the job.*
+    commands and edit it accordingly. *NOTE: Pay attention to what python
+    database adapter you use. You might have better luck using different ones on
+    your system*
 
-        cp config-example.yml config.yml
-        $EDITOR config.yml
+        $ cp config-example.yml config.yml
+        $ $EDITOR config.yml
 
-6.  That's it! You probably want to load the data now. You can do this by
+6.  Now that we have configured a connection to the database we can create our
+    tables. To do this you start an interactive python prompt and import the
+    `play.py` file.
+
+        $ python
+        ...
+        >>> from play import *
+
+    Then we just have to run `create_all` on the database session to create the
+    tables.
+
+        >>> db.create_all()
+
+7.  That's it! You probably want to load the data now. You can do this by
     running the following commands: 
 
         $ python load-users.py
@@ -121,8 +114,8 @@ these are covered in the Heroku instructions referenced above).
 
     Or you can start the web app:
 
-        python web.py
+        $ python web.py
  
     Or if you have foreman installed (`gem install foreman`):
 
-        foreman start web
+        $ foreman start web

@@ -212,8 +212,8 @@ class Creditcard(db.Model):
     billing_id = db.Column(u'billing_id', db.Integer(),
             db.ForeignKey('Billing.id'))
     name = db.Column(u'name', db.String(length=64), nullable=False)
-    cc_number = db.Column(u'cc_number', db.INTEGER(20), nullable=False)
-    sec_number = db.Column(u'sec_number', db.INTEGER(4), nullable=False)
+    cc_number = db.Column(u'cc_number', db.Integer(), nullable=False)
+    sec_number = db.Column(u'sec_number', db.Integer(), nullable=False)
     exp_date = db.Column(u'exp_date', db.Date(), nullable=False)
     date_created = db.Column(u'date_created', db.DateTime(), nullable=False)
     date_modified = db.Column(u'date_modified', db.DateTime(), nullable=False)
@@ -445,7 +445,7 @@ class User(db.Model):
     id = db.Column(u'id', db.Integer(), primary_key=True, nullable=False)
     name = db.Column(u'name', db.String(length=64))
     password = db.Column(u'password', db.String(length=64), nullable=False)
-    phone = db.Column(u'phone', db.INTEGER(15))
+    phone = db.Column(u'phone', db.Integer())
     username = db.Column(u'username', db.String(length=32), nullable=False,
             unique=True)
     authenticated = False

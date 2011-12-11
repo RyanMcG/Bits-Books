@@ -6,7 +6,5 @@
 -- The following commands must be executed by a User who has the required
 -- privileges.
 
-CREATE SCHEMA bitbook;
-CREATE USER 'bitbook'@'localhost' IDENTIFIED BY 'amazon';
-GRANT ALL ON bitbook.* TO 'bitbook'@'localhost';
-USE bitbook;
+CREATE USER bitbook WITH PASSWORD 'amazon';
+CREATE DATABASE bitbook OWNER bitbook;
