@@ -84,6 +84,11 @@ these are covered in the Heroku instructions referenced above).
         $ cp config-example.yml config.yml
         $ $EDITOR config.yml
 
+    Installing on heroku requires that all of your files on the heroku server
+    being controlled by git. That means you would have to version control your
+    `config.yml` file. This can be a security issue.  Since this is the case you
+    can also configure the application with environment variables.
+
 6.  Now that we have configured a connection to the database we can create our
     tables. To do this you start an interactive python prompt and import the
     `play.py` file.
