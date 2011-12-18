@@ -34,17 +34,19 @@ body.bp
     padding: 0
     font-family: $header-font
     font-weight: bold
-    color: $mycolor
+    color: darken($blueprint-background-color, 10%)
     li
       margin: 0 .4em
       +float-left
       &.last
         +last
       &:before
-        content: '[ '
+        content: '['
       &:after
-        content: ' ]'
+        content: ']'
       a
+        margin: 0 1em
+        font-size: 1em
         text-decoration: none
         color: lighten($button_text_color, 20%)
         &:hover
@@ -81,39 +83,36 @@ body.bp
   font-family: $header-font
   text-align: center
 
-input
-  display: block
-
-input[type="submit"]
-  +pretty-button
-  +float-right
-  margin: .1em 0
-
-.main-search 
-  +column(18, true)
-
-  .searchbar
-    position: relative
-    text-align: center
+body.bp #container
   input
-    font-size: 1.6em
-    line-height: 1em
-    &#search
-      display: inline
-      width: 85%
-      margin: 0
-      $nav_color: darken($blueprint-border-color, 60%)
-      $navrad: .2em
-      padding: .6em .8em
-      color: #f9f9f9
-      border: $navrad solid lighten($nav_color, 20%)
-      background-color: $nav_color
-      list-style-type: none
-      +box-shadow(0 0 4em lighten($nav_color, 30%), inset 0 0 1em darken($nav_color, 20%))
-      +border-radius($navrad * 2)
-      font-family: $blueprint-fixed-font-family
-      font-weight: bold
-    &[type="submit"]
-      margin: .4em 2em 0 0
-    &:focus
-      outline: none
+    display: block
+    border: none
+
+  input[type="submit"]
+    +pretty-button
+    +float-right
+    margin: .1em 0
+
+  input[type="text"], input[type="password"], input[type="email"], textarea
+    +inset-field()
+
+  .main-search 
+    +column(18, true)
+    margin: 0 0 .4em
+
+    .searchbar
+      +column(14)
+    input
+      font-size: 1.6em
+      line-height: 1em
+      &#search
+        display: inline
+        padding: .4em (1.5 * $blueprint-grid-margin)
+        width: span(14) - (3 * $blueprint-grid-margin)
+        margin: 0
+        list-style-type: none
+      &[type="submit"]
+        padding: .4em (1.5 * $blueprint-grid-margin)
+        +column(4, true)
+      &:focus
+        outline: none
