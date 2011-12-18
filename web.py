@@ -44,7 +44,6 @@ def index():
         authors = Author.query.filter(Author.name.like(searchq)).all()
         for a in authors:
             books.extend(a.Books)
-        print books
         results = [(x.isbn, x.title, x.price) for x in books]
     return render_template("index.html", form=form, results=results)
 
@@ -104,8 +103,11 @@ def register():
                                 successfully!", "success")
                     return redirect(to_page or url_for("index"))
                 except:
-                    flash("We're sorry, we were unable to register you. Feel\
-                            free to try again.", "error")
+                    if not app.debug:
+                        flash("We're sorry, we were unable to register you.\
+                                Feel free to try again.", "error")
+                    else:
+                        raise
             else:
                 for key, msg in form.errors.items():
                     flash("Could not validate " + key + ": " + ", ".join(msg),
@@ -114,11 +116,6 @@ def register():
     else:
         flash("You are already logged in!", "info")
         return redirect(request.args.get("next") or url_for("index"))
-
-
-@app.route('/search')
-def search():
-    pass
 
 
 @app.route('/view/history')
