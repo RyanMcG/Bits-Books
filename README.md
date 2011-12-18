@@ -13,7 +13,6 @@ Flask front-end for sample book selling ecommerce site called Bits &amp; Books.
     * Flask
 * Compass and SASS
     * blueprint/semantic
-* HAML
 * PostgreSQL (or another RDBMS that SQLAlchemy supports)
 
 --------
@@ -90,8 +89,11 @@ these are covered in the Heroku instructions referenced above).
     can also configure the application with environment variables.
 
 6.  Now that we have configured a connection to the database we can create our
-    tables. To do this you start an interactive python prompt and import the
-    `play.py` file.
+    tables. This can be done in one of two ways. If you want are using the
+    postgresql and you want to load sample data you can use the database dump
+    located in the root of this project, `bitbook.sql`, and skip to step 8.
+    Otheriwse, continue by starting an interactive python prompt and importing
+    the `play.py` file.
 
         $ python
         ...
@@ -109,7 +111,7 @@ these are covered in the Heroku instructions referenced above).
         $ python load-books.py
         $ python load-inventory-orders.py
 
-    Once that's done you can now either use the application interactively:
+8.  Once that's done you can now either use the application interactively:
 
         $ python
         ....
