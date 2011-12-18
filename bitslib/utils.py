@@ -14,7 +14,10 @@ def debug_str(print_me):
 
 
 def str_to_digits(wannabe_number):
-    return ''.join(filter(lambda x: x.isdigit(), str(wannabe_number)))
+    if isinstance(wannabe_number, int):
+        return wannabe_number
+    else:
+        return int(''.join(filter(lambda x: x.isdigit(), str(wannabe_number))))
 
 
 def generate_encrypted_password(password, user=None):

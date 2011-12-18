@@ -61,7 +61,7 @@ class Author(db.Model):
     date_created = db.Column(u'date_created', db.DateTime(), nullable=False)
     date_modified = db.Column(u'date_modified', db.DateTime(), nullable=False)
     id = db.Column(u'id', db.Integer(), primary_key=True, nullable=False)
-    name = db.Column(u'name', db.String(length=32), nullable=False)
+    name = db.Column(u'name', db.Text(), nullable=False)
 
     def __init__(self, name, b_date):
         current_time = now().strftime("%Y-%m-%d %H:%M")
@@ -106,12 +106,12 @@ class Book(db.Model):
     date_created = db.Column(u'date_created', db.DateTime(), nullable=False)
     date_modified = db.Column(u'date_modified', db.DateTime(), nullable=False)
     id = db.Column(u'id', db.Integer(), primary_key=True, nullable=False)
-    isbn = db.Column(u'isbn', db.Integer(), nullable=False, unique=True)
+    isbn = db.Column(u'isbn', db.BigInteger(), nullable=False, unique=True)
     price = db.Column(u'price', db.DECIMAL(precision=7, scale=2),
             nullable=False)
     publisher_id = db.Column(u'publisher_id', db.Integer(),
             db.ForeignKey('Publisher.id'))
-    title = db.Column(u'title', db.String(length=64), nullable=False)
+    title = db.Column(u'title', db.Text(), nullable=False)
 
     def __init__(self, isbn, title, price, pub_id):
         current_time = now().strftime("%Y-%m-%d %H:%M")
@@ -190,7 +190,7 @@ class Category(db.Model):
     date_created = db.Column(u'date_created', db.DateTime(), nullable=False)
     date_modified = db.Column(u'date_modified', db.DateTime(), nullable=False)
     id = db.Column(u'id', db.Integer(), primary_key=True, nullable=False)
-    name = db.Column(u'name', db.String(length=32), nullable=False,
+    name = db.Column(u'name', db.String(length=64), nullable=False,
             unique=True)
 
     def __init__(self, name):
@@ -212,7 +212,7 @@ class Creditcard(db.Model):
     billing_id = db.Column(u'billing_id', db.Integer(),
             db.ForeignKey('Billing.id'))
     name = db.Column(u'name', db.String(length=64), nullable=False)
-    cc_number = db.Column(u'cc_number', db.Integer(), nullable=False)
+    cc_number = db.Column(u'cc_number', db.BigInteger(), nullable=False)
     sec_number = db.Column(u'sec_number', db.Integer(), nullable=False)
     exp_date = db.Column(u'exp_date', db.Date(), nullable=False)
     date_created = db.Column(u'date_created', db.DateTime(), nullable=False)
@@ -440,12 +440,12 @@ class User(db.Model):
     #column definitions
     date_created = db.Column(u'date_created', db.DateTime(), nullable=False)
     date_modified = db.Column(u'date_modified', db.DateTime(), nullable=False)
-    email = db.Column(u'email', db.String(length=64), nullable=False,
+    email = db.Column(u'email', db.String(length=128), nullable=False,
             unique=True)
     id = db.Column(u'id', db.Integer(), primary_key=True, nullable=False)
     name = db.Column(u'name', db.String(length=64))
     password = db.Column(u'password', db.String(length=64), nullable=False)
-    phone = db.Column(u'phone', db.Integer())
+    phone = db.Column(u'phone', db.BigInteger())
     username = db.Column(u'username', db.String(length=32), nullable=False,
             unique=True)
     authenticated = False
@@ -495,10 +495,10 @@ class UserAddress(db.Model):
     __table_args__ = {}
 
     #column definitions
-    address1 = db.Column(u'address1', db.String(length=32), nullable=False)
+    address1 = db.Column(u'address1', db.String(length=64), nullable=False)
     address2 = db.Column(u'address2', db.String(length=32))
-    city = db.Column(u'city', db.String(length=20), nullable=False)
-    country = db.Column(u'country', db.String(length=20), nullable=False)
+    city = db.Column(u'city', db.String(length=32), nullable=False)
+    country = db.Column(u'country', db.String(length=32), nullable=False)
     date_created = db.Column(u'date_created', db.DateTime(), nullable=False)
     date_modified = db.Column(u'date_modified', db.DateTime(), nullable=False)
     id = db.Column(u'id', db.Integer(), primary_key=True, nullable=False)
