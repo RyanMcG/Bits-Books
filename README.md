@@ -1,17 +1,21 @@
 # Bits & Books
+##### Version: 0.1.0
 ### Authors: Ryan McGowan and Alex Notwell
 
 ## Description
 
 Flask front-end for sample book selling ecommerce site called Bits &amp; Books.
+This is not used anywhere as a production site and has the sole purpose of being
+a learning tool for myself (and maybe an example for others). The site is
+currently in development, and is not stable.
 
-## Development
+This project uses [semantic versioning](http://http://semver.org/).
 
 ### Technologies Used:
 
 * Python
     * Flask
-* Compass and SASS
+* Compass and SASS (Not required, but recomended)
     * blueprint/semantic
 * PostgreSQL (or another RDBMS that SQLAlchemy supports)
 

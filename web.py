@@ -1,3 +1,8 @@
+# Bits & Books - A bookstore built with Flask
+# Author: Ryan McGowan
+#
+# Version: 0.1.0
+
 import os
 
 from bitslib.database import init_db
@@ -16,6 +21,7 @@ from sys import argv
 
 #Create the app
 app = Flask(__name__)
+version = "0.1.0"
 
 #Run various initilization functions.
 read_system_config(app, argv)
@@ -172,6 +178,7 @@ def run_application():
         address = "127.0.0.1"
         port = int(os.environ.get("PORT", 5000))
 
+    print "Starting Bits & Books " + version
     app.run(address, port)
 
 
