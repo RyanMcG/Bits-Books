@@ -22,7 +22,8 @@ def str_to_digits(wannabe_number):
     if isinstance(wannabe_number, int):
         return wannabe_number
     else:
-        return int(''.join(filter(lambda x: x.isdigit(), str(wannabe_number))))
+        ret = ''.join(filter(lambda x: x.isdigit(), str(wannabe_number)))
+        return int(ret) if ret != '' else None
 
 
 def generate_encrypted_password(password):

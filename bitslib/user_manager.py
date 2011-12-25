@@ -24,10 +24,10 @@ def check_login(username, password):
     user = User.query.filter(User.username ==
             username).first()
     if user:
-        hash = hashlib.sha1()
-        salt, pwd = password.split('$', 2)
-        hash.update(salt + password)
-        if hash.hexdigest() == pwd:
+        hasher = hashlib.sha1()
+        salt, pwd = user.password.split('$', 2)
+        hasher.update(salt + password)
+        if hasher.hexdigest() == pwd:
             user.authenticated = True
             return user
         else:

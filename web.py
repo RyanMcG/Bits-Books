@@ -10,7 +10,7 @@ from bitslib.forms import LoginForm, RegistrationForm, SearchForm
 from bitslib.models import User
 from bitslib.operations import DatabaseOperations
 from bitslib.user_manager import login_manager, check_login
-from bitslib.utils import debug_str, str_to_digits
+from bitslib.utils import debug_str
 from bitslib.config import read_system_config, init_logging
 from flask import (Flask, send_from_directory, render_template, redirect,
         request, url_for, flash)
@@ -53,6 +53,7 @@ def index():
     """Render the site homepage, which is also the search page."""
     form = SearchForm()
     search = request.args.get("search")
+    results = None
     if search:
         results = ops.get_search_results(search)
     return render_template("index.html", form=form, results=results)
@@ -101,9 +102,8 @@ def register():
         if form.is_submitted():
             if form.validate():
                 try:
-                    db.session.add(User(form.email.data,
-                        form.username.data, form.password.data, form.name.data,
-                        str_to_digits(form.phone.data)))
+                    db.session.add(User(form.email.data, form.username.data,
+                        form.password.data, form.name.data, form.phone.data))
                     db.session.commit()
                     flash("Congratualtions, " + (form.name.data or
                         form.username.data) + "! You have registered\

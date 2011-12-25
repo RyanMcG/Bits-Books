@@ -451,7 +451,7 @@ class User(db.Model):
     authenticated = False
 
     def __init__(self, email, username, password, name=None, phone=None):
-        self.name = name
+        self.name = name if name != '' else None
         self.username = username
         self.email = email
         self.password = generate_encrypted_password(password)
