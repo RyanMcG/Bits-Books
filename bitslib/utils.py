@@ -1,4 +1,7 @@
 from flask import Markup
+import hashlib
+import string
+import random
 
 
 def debug_str(print_me):
@@ -14,15 +17,23 @@ def debug_str(print_me):
 
 
 def str_to_digits(wannabe_number):
+    """Returns an integer version of the given string or int by removing all
+    non-digit characters."""
     if isinstance(wannabe_number, int):
         return wannabe_number
     else:
         return int(''.join(filter(lambda x: x.isdigit(), str(wannabe_number))))
 
 
-def generate_encrypted_password(password, user=None):
+def generate_encrypted_password(password):
+    """Encrypts the password by hashing it with a random salt."""
+    salt = generate_salt()
+    hash = hashlib.sha1()
+    hash.update(salt + password)
+    password = salt + "$" + hash.hexdigest()
     return password
 
 
-def generate_salt():
-    return "skdjansU983j4398ns0d9"
+def generate_salt(length=8):
+    """Generates a random string of the given length to be used as a salt."""
+    return "".join(random.sample(string.letters + string.digits, length))

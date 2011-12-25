@@ -3,13 +3,12 @@ import os
 from bitslib.database import init_app
 from bitslib.forms import LoginForm, RegistrationForm, SearchForm
 from bitslib.models import User, Book, Author
-from bitslib.user_manager import login_manager
+from bitslib.user_manager import login_manager, check_login
 from bitslib.utils import debug_str, str_to_digits
 from flask import (Flask, send_from_directory, render_template, redirect,
         request, url_for, flash)
 from flaskext.login import (login_user, login_required, logout_user,
         current_user)
-from sqlalchemy import and_
 from sys import argv
 
 #Create the app and then import the database (must be done in this order)
@@ -64,15 +63,12 @@ def login():
         form = LoginForm()
         if form.is_submitted():
             if form.validate():
-                try:
-                    user = User.query.filter(and_(
-                        User.username == form.username.data,
-                        User.password == form.password.data)).first()
-                    user.authenticated = True
+                user = check_login(form.username.data, form.password.data)
+                if user:
                     login_user(user, form.remember_me.data)
                     flash("Logged in successfully.", "success")
                     return redirect(to_page or url_for("index"))
-                except:
+                else:
                     flash("Invalid Username/Password", "error")
             else:
                 for key, msg in form.errors.items():

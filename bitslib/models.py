@@ -3,7 +3,7 @@
 
 from datetime import datetime
 from bitslib.database import db
-from bitslib.utils import generate_encrypted_password, str_to_digits
+from bitslib.utils import str_to_digits, generate_encrypted_password
 
 #Alias a function
 now = datetime.now
@@ -16,7 +16,7 @@ Book_Author = db.Table(u'Book_Author',
         db.Column(u'author_id', db.Integer(), db.ForeignKey('Author.id')),
         db.Column(u'date_created', db.DateTime(), nullable=False),
         db.Column(u'date_modified', db.DateTime(), nullable=False),
-        )
+    )
 
 Book_Category = db.Table(u'Book_Category',
         db.Column(u'id', db.Integer(), primary_key=True, nullable=False),
@@ -24,7 +24,7 @@ Book_Category = db.Table(u'Book_Category',
         db.Column(u'category_id', db.Integer(), db.ForeignKey('Category.id')),
         db.Column(u'date_created', db.DateTime(), nullable=False),
         db.Column(u'date_modified', db.DateTime(), nullable=False),
-        )
+    )
 
 
 class Admin(db.Model):
@@ -481,7 +481,7 @@ class User(db.Model):
         return self.is_authenticated()
 
     def is_admin(self):
-        #print User.Admin
+        #TODO: Test whehter admin relationship exists
         return False
 
     #db.relationship definitions
