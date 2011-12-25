@@ -1,22 +1,32 @@
 import os
 
-from bitslib.database import init_app
+from bitslib.database import init_db
 from bitslib.forms import LoginForm, RegistrationForm, SearchForm
-from bitslib.models import User, Book, Author
+from bitslib.models import User
+from bitslib.operations import get_search_results
 from bitslib.user_manager import login_manager, check_login
 from bitslib.utils import debug_str, str_to_digits
+from bitslib.logging import init_logging
+from bitslib.config import read_system_config
 from flask import (Flask, send_from_directory, render_template, redirect,
         request, url_for, flash)
 from flaskext.login import (login_user, login_required, logout_user,
         current_user)
 from sys import argv
 
-#Create the app and then import the database (must be done in this order)
+#Create the app
 app = Flask(__name__)
-db = init_app(app, argv)
+
+#Run various initilization functions.
+read_system_config(app, argv)
+init_logging(app)
+db = init_db(app)
+
+#Required by Flask-Login extension
 login_manager.setup_app(app)
 
 
+#Always send the logged_in/is_admin status to a template
 @app.context_processor
 def inject_user():
     """Tell the view whether someone is logged in or not"""
@@ -24,6 +34,7 @@ def inject_user():
             'is_admin': current_user.is_active() and current_user.is_admin()}
 
 
+#For browsers that do not support the link tag for favicon
 @app.route('/favicon.ico')
 def favicon():
     """Reroute requests to the favicon to the correct location in static."""
@@ -33,17 +44,9 @@ def favicon():
 
 @app.route('/')
 def index():
-    #Show main page with search
+    """Render the site homepage, which is also the search page."""
     form = SearchForm()
-    results = False
-    search = request.args.get("search")
-    if search:
-        searchq = "%" + search + "%"
-        books = Book.query.filter(Book.title.like(searchq)).all()
-        authors = Author.query.filter(Author.name.like(searchq)).all()
-        for a in authors:
-            books.extend(a.Books)
-        results = [(x.isbn, x.title, x.price) for x in books]
+    results = get_search_results(request.args.get("search"))
     return render_template("index.html", form=form, results=results)
 
 
