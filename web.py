@@ -8,11 +8,10 @@ import os
 from bitslib.database import init_db
 from bitslib.forms import LoginForm, RegistrationForm, SearchForm
 from bitslib.models import User
-from bitslib.operations import get_search_results
+from bitslib.operations import DatabaseOperations
 from bitslib.user_manager import login_manager, check_login
 from bitslib.utils import debug_str, str_to_digits
-from bitslib.logging import init_logging
-from bitslib.config import read_system_config
+from bitslib.config import read_system_config, init_logging
 from flask import (Flask, send_from_directory, render_template, redirect,
         request, url_for, flash)
 from flaskext.login import (login_user, login_required, logout_user,
@@ -27,6 +26,7 @@ version = "0.1.0"
 read_system_config(app, argv)
 init_logging(app)
 db = init_db(app)
+ops = DatabaseOperations(app, db)
 
 #Required by Flask-Login extension
 login_manager.setup_app(app)
@@ -52,7 +52,9 @@ def favicon():
 def index():
     """Render the site homepage, which is also the search page."""
     form = SearchForm()
-    results = get_search_results(request.args.get("search"))
+    search = request.args.get("search")
+    if search:
+        results = ops.get_search_results(search)
     return render_template("index.html", form=form, results=results)
 
 
@@ -178,7 +180,7 @@ def run_application():
         address = "127.0.0.1"
         port = int(os.environ.get("PORT", 5000))
 
-    print "Starting Bits & Books " + version
+    app.logger.info("Starting Bits & Books " + version)
     app.run(address, port)
 
 
