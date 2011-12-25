@@ -1115,7 +1115,7 @@ body.bp #container input[type="submit"] img {
   float: none;
 }
 /* line 48, ../../sass/_base.sass */
-body.bp #container input[type="submit"]:hover {
+body.bp #container input[type="submit"]:active {
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(5%, #e3e3e3), color-stop(100%, #f0f0f0));
   background-image: -webkit-linear-gradient(center top, #e3e3e3 5%, #f0f0f0 100%);
   background-image: -moz-linear-gradient(center top, #e3e3e3 5%, #f0f0f0 100%);
