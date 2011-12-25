@@ -57,9 +57,11 @@ def read_system_config(app, cliargs):
 
 def init_logging(app):
     """Adds some handlers to the default logger."""
-    logFileName = 'production' if app.is_production else 'development' + '.log'
-    logFilePath = path.join(app.root_path, 'log/' + logFileName)
-    handler = TimedRotatingFileHandler(logFilePath,
-            when=app.config['LOGGER']['INTERVAL_TYPE'],
-            interval=app.config['LOGGER']['INTERVAL_COUNT'])
-    app.logger.addHandler(handler)
+    if not app.is_production:
+        logFileName = 'production.log' if app.is_production else \
+                'development.log'
+        logFilePath = path.join(app.root_path, 'log/' + logFileName)
+        handler = TimedRotatingFileHandler(logFilePath,
+                when=app.config['LOGGER']['INTERVAL_TYPE'],
+                interval=app.config['LOGGER']['INTERVAL_COUNT'])
+        app.logger.addHandler(handler)
