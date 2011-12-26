@@ -1,7 +1,7 @@
-from bitslib.models import Book, Author
+from model.models import Book, Author
 
 
-class DatabaseOperations(object):
+class ModelHelper(object):
     """Helper class for running indepth database operations."""
 
     def __init__(self, app, db):

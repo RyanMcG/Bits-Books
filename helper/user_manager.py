@@ -1,6 +1,6 @@
 import hashlib
 from flaskext.login import LoginManager
-from bitslib.models import User
+from model.models import User
 
 login_manager = LoginManager()
 login_manager.login_view = "login"

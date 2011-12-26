@@ -1,17 +1,18 @@
 # Bits & Books - A bookstore built with Flask
 # Author: Ryan McGowan
 #
-# Version: 0.1.0
+# Version:
+version = "0.1.1"
 
 import os
 
-from bitslib.database import init_db
-from bitslib.forms import LoginForm, RegistrationForm, SearchForm
-from bitslib.models import User
-from bitslib.operations import DatabaseOperations
-from bitslib.user_manager import login_manager, check_login
-from bitslib.utils import debug_str
-from bitslib.config import read_system_config, init_logging
+from model.database import init_db
+from helper.forms import LoginForm, RegistrationForm, SearchForm
+from model.models import User
+from helper.model_helper import ModelHelper
+from helper.user_manager import login_manager, check_login
+from functions.utils import debug_str
+from functions.config import read_system_config, init_logging
 from flask import (Flask, send_from_directory, render_template, redirect,
         request, url_for, flash)
 from flaskext.login import (login_user, login_required, logout_user,
@@ -20,13 +21,12 @@ from sys import argv
 
 #Create the app
 app = Flask(__name__)
-version = "0.1.0"
 
 #Run various initilization functions.
 read_system_config(app, argv)
 init_logging(app)
 db = init_db(app)
-ops = DatabaseOperations(app, db)
+mhelper = ModelHelper(app, db)
 
 #Required by Flask-Login extension
 login_manager.setup_app(app)
@@ -55,7 +55,7 @@ def index():
     search = request.args.get("search")
     results = None
     if search:
-        results = ops.get_search_results(search)
+        results = mhelper.get_search_results(search)
     return render_template("index.html", form=form, results=results)
 
 

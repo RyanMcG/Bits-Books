@@ -2,8 +2,8 @@
 #Flask-SQLAlchemy
 
 from datetime import datetime
-from bitslib.database import db
-from bitslib.utils import str_to_digits, generate_encrypted_password
+from model.database import db
+from functions.utils import str_to_digits, generate_encrypted_password
 
 #Alias a function
 now = datetime.now
