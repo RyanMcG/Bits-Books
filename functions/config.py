@@ -72,7 +72,7 @@ def init_logging(app):
                 interval=app.config['LOGGER']['INTERVAL_COUNT'])
         thandler.setFormatter(Formatter("%(asctime)s %(levelname)s: " +
                 "%(message)s [in %(pathname)s:%(lineno)d]"))
-        handlers.push(thandler)
+        handlers.append(thandler)
 
         for handler in handlers:
             app.logger.addHandler(thandler)
