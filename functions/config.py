@@ -1,9 +1,10 @@
 from os import path, environ
-from yaml import load
-from logging.handlers import TimedRotatingFileHandler
 
 
 def read_system_config(app, cliargs):
+    """Read system configuration from file and fallback on env variables."""
+    from yaml import load
+
     server_type = "development"  # The default server type
     #Set Timed Logger rotation interval
     app.config['LOGGER'] = {'INTERVAL_TYPE': 'D', 'INTERVAL_COUNT': 7}
@@ -57,6 +58,9 @@ def read_system_config(app, cliargs):
 
 def init_logging(app):
     """Adds some handlers to the default logger."""
+    from logging.handlers import TimedRotatingFileHandler
+    from logging import Formatter
+
     if not app.is_production:
         logFileName = 'production.log' if app.is_production else \
                 'development.log'
@@ -64,4 +68,6 @@ def init_logging(app):
         handler = TimedRotatingFileHandler(logFilePath,
                 when=app.config['LOGGER']['INTERVAL_TYPE'],
                 interval=app.config['LOGGER']['INTERVAL_COUNT'])
+        handler.setFormatter(Formatter("%(asctime)s %(levelname)s: " +
+                "%(message)s [in %(pathname)s:%(lineno)d]"))
         app.logger.addHandler(handler)
