@@ -58,16 +58,21 @@ def read_system_config(app, cliargs):
 
 def init_logging(app):
     """Adds some handlers to the default logger."""
-    from logging.handlers import TimedRotatingFileHandler
-    from logging import Formatter
-
     if not app.is_production:
+        from logging.handlers import TimedRotatingFileHandler
+        from logging import Formatter
+
+        handlers = []
+        #Create timed, rotating file handler.
         logFileName = 'production.log' if app.is_production else \
                 'development.log'
         logFilePath = path.join(app.root_path, 'log/' + logFileName)
-        handler = TimedRotatingFileHandler(logFilePath,
+        thandler = TimedRotatingFileHandler(logFilePath,
                 when=app.config['LOGGER']['INTERVAL_TYPE'],
                 interval=app.config['LOGGER']['INTERVAL_COUNT'])
-        handler.setFormatter(Formatter("%(asctime)s %(levelname)s: " +
+        thandler.setFormatter(Formatter("%(asctime)s %(levelname)s: " +
                 "%(message)s [in %(pathname)s:%(lineno)d]"))
-        app.logger.addHandler(handler)
+        handlers.push(thandler)
+
+        for handler in handlers:
+            app.logger.addHandler(thandler)
